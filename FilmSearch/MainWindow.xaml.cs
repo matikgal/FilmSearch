@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace MovieSearchWPF
-{
+{/*
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -124,5 +124,5 @@ namespace MovieSearchWPF
                 }
             }
         }
-    }
+    }*/
 }

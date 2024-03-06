@@ -5,50 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="MovieSearchWPF.MainWindow"
         mc:Ignorable="d"
-        Title="Movie Search" Height="600" Width="920" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True">
+        Height="600" 
+        Width="920" 
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
+        Background="Transparent" 
+        AllowsTransparency="True">
+
     <Border Background="#3a3b3a" CornerRadius="10">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <TextBox x:Name="SearchTextBox" Width="200" Margin="0,0,10,0"/>
-            <Button Content="Search" Click="SearchButton_Click"/>
-        </StackPanel>
-
-        <ListBox x:Name="ResultListBox" Grid.Row="1" Margin="10,10,559,10" SelectionChanged="ResultListBox_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <Grid Grid.Row="1" Margin="10,0,0,0" HorizontalAlignment="Right">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" Margin="0,0,0,10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="200"/>
-                   
+                    <RowDefinition Height="75"/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Description:" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="DescriptionTextBox" Grid.Row="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Width="300" Margin="0,0,0,-353"/>
-                
-            </Grid>
+                <TextBlock Text="MasneFilmy" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Left" 
+                    Foreground="White"
+                    FontSize="22"
+                    Margin="20,0,0,0"/>
 
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10"/>
+                <StackPanel Grid.Row="1">
+                    
+                <RadioButton Content="Movies"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"/>
 
-            <Image x:Name="PosterImage" Grid.Column="2" Width="200" Height="300" Margin="0,82,10,202"/>
+                <RadioButton Content="TV Shows"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Top Rated Movies"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"/>
+
+                <RadioButton Content="Top Rated TV Shows"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"/>
+
+
+            </StackPanel>
+
+            <TextBox Width="250"
+                     Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"/>
+
         </Grid>
-    </Grid>
+
+
     </Border>
 </Window>
