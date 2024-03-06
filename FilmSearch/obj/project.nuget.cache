@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "WMVk1MAgEGkLbCaDbtkaOx6N/aBKKh4mrRn4eM/KKYi+vi8CRcjA4AXuCQdP3L0Q5zk29jSbBi7xLMPzz3pGNQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\FilmSearch.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MAT\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\prism.wpf\\8.1.97\\prism.wpf.8.1.97.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\wpf-ui\\3.0.0\\wpf-ui.3.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
