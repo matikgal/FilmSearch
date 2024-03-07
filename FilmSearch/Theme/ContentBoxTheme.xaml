@@ -12,7 +12,7 @@
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" Width="710" />
+                                <WrapPanel Orientation="Horizontal" Width="{Binding RelativeSource={RelativeSource AncestorType=ContentControl}, Path=ActualWidth}" />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>

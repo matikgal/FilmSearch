@@ -13,7 +13,7 @@
     <Page Update="Theme\ContentBoxTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Theme\ExitBtnTheme.xaml">
+    <Page Update="Theme\FunctionBtnTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme\MenuButtonTheme.xaml">

@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="MovieSearchWPF.MainWindow"
         mc:Ignorable="d"
-        Height="600" 
+        Height="720" 
         Width="920" 
+        MinWidth="920"
+        MinHeight="570"
         WindowStyle="None" 
-        ResizeMode="NoResize" 
+        ResizeMode="CanResizeWithGrip"
         Background="Transparent" 
-        AllowsTransparency="True">
+        AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+
 
     <Border Background="#3a3b3a" CornerRadius="10">
         <Grid>
@@ -33,25 +36,25 @@
 
             <StackPanel Grid.Row="1">
 
-                <RadioButton Content="Movies"
+                <RadioButton x:Name="Movies" Content="Movies"
                         Height="50"
                         Foreground="White"
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"/>
 
-                <RadioButton Content="TV Shows"
+                <RadioButton x:Name="TV_Shows" Content="TV Shows"
                         Height="50"
                         Foreground="White"
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"/>
 
-                <RadioButton Content="Top Rated Movies"
+                <RadioButton x:Name="Top_Rated_Movies" Content="Top Rated Movies"
                         Height="50"
                         Foreground="White"
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"/>
 
-                <RadioButton Content="Top Rated TV Shows"
+                <RadioButton x:Name="Top_Rated_TV_Shows" Content="Top Rated TV Shows"
                         Height="50"
                         Foreground="White"
                         FontSize="14"
@@ -65,28 +68,19 @@
                      HorizontalAlignment="Left" 
                      TextWrapping="Wrap" 
                      VerticalAlignment="Center" 
-                     Width="200" Height="39" 
+                     Width="200" Height="40" 
                      Style="{StaticResource ModernTextbox}" 
                      TextChanged="SearchBox_TextChanged" 
                      Margin="10,0,0,0"/>
 
             <ContentControl x:Name="ContentBox" Style="{StaticResource ContentBoxStyle}" />
-            <Button Content="Close"
-                    Style="{StaticResource CloseButtonStyle}"
-                    Click="CloseButton_Click"
-                    Grid.Column="1"
-                    Margin="265,10,265,0"/>
 
-
-
-
-
-
-
-
-
-
-
+            <Ellipse x:Name="Exit" Style="{StaticResource ExitButtonStyle}" 
+                     MouseLeftButtonDown="Exit_MouseLeftButtonDown"/>
+            <Ellipse x:Name="MaxMin" Style="{StaticResource MaxMinButtonStyle}" 
+                     MouseLeftButtonDown="MaxMin_MouseLeftButtonDown"/>
+            <Ellipse x:Name="Hide" Style="{StaticResource HideButtonStyle}" 
+                     MouseLeftButtonDown="Hide_MouseLeftButtonDown"/>
 
 
 

@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MovieSearchWPF
 {
@@ -63,6 +64,14 @@ namespace MovieSearchWPF
 
             // Pobierz popularne filmy podczas inicjalizacji okna
             InitializePopularMoviesAsync();
+
+            // Przypisanie obsługi zdarzenia dla przycisku "Movies"
+            Movies.Click += Movies_Click;
+
+            TV_Shows.Click += TV_Shows_Click;
+
+            Top_Rated_Movies.Click += Top_Rated_Movies_Click;
+            Top_Rated_TV_Shows.Click += Top_Rated_TV_Shows_Click;
         }
 
         private async Task InitializePopularMoviesAsync()
@@ -106,7 +115,137 @@ namespace MovieSearchWPF
             }
         }
 
-        
+        private async Task GetMoviesAsync(string url)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var movies = JsonSerializer.Deserialize<SearchResult>(json);
+
+                    MoviePosters.Clear();
+                    foreach (var movie in movies.results.Take(40))
+                    {
+                        if (!string.IsNullOrEmpty(movie.poster_path))
+                        {
+                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to retrieve movie data from API.");
+                }
+            }
+        }
+
+        private async Task GetTopRatedMoviesAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = $"https://api.themoviedb.org/3/movie/top_rated?api_key={ApiKey}&language=en-US&page=1";
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var topRatedMovies = JsonSerializer.Deserialize<SearchResult>(json);
+
+                    MoviePosters.Clear();
+                    foreach (var movie in topRatedMovies.results.Take(40))
+                    {
+                        // Sprawdź czy film ma plakat
+                        if (!string.IsNullOrEmpty(movie.poster_path))
+                        {
+                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to retrieve movie data from API.");
+                }
+            }
+        }
+
+        private async Task GetTopRatedTVShowsAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = $"https://api.themoviedb.org/3/tv/top_rated?api_key={ApiKey}&language=en-US&page=1";
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var topRatedTVShows = JsonSerializer.Deserialize<SearchResult>(json);
+
+                    MoviePosters.Clear();
+                    foreach (var show in topRatedTVShows.results.Take(40))
+                    {
+                        // Sprawdź czy program telewizyjny ma plakat
+                        if (!string.IsNullOrEmpty(show.poster_path))
+                        {
+                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{show.poster_path}" });
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to retrieve TV show data from API.");
+                }
+            }
+        }
+
+        private async void Top_Rated_Movies_Click(object sender, RoutedEventArgs e)
+{
+    await GetTopRatedMoviesAsync();
+}
+
+private async void Top_Rated_TV_Shows_Click(object sender, RoutedEventArgs e)
+{
+    await GetTopRatedTVShowsAsync();
+}
+
+
+        private async void Movies_Click(object sender, RoutedEventArgs e)
+        {
+            string url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
+            await GetMoviesAsync(url);
+        }
+
+        private async void TV_Shows_Click(object sender, RoutedEventArgs e)
+        {
+            string url = $"https://api.themoviedb.org/3/discover/tv?api_key={ApiKey}&sort_by=popularity.desc";
+            await GetMoviesAsync(url);
+        }
+
+        // Obsługa zdarzenia kliknięcia na przycisku "Exit"
+        private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown(); // Wyłączenie aplikacji
+        }
+
+        // Obsługa zdarzenia kliknięcia na przycisku "MaxMin"
+        private void MaxMin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized; // Maksymalizacja okna
+            }
+            else
+            {
+                WindowState = WindowState.Normal; // Przywrócenie okna do normalnego rozmiaru
+            }
+        }
+
+        // Obsługa zdarzenia kliknięcia na przycisku "Hide"
+        private void Hide_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized; // Minimalizacja okna
+        }
+
+
 
         public class SearchResult
         {
@@ -123,9 +262,6 @@ namespace MovieSearchWPF
             public string PosterPath { get; set; }
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
+      
     }
 }
