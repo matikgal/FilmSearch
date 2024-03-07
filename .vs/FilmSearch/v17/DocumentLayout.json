@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\MAT\\Desktop\\FilmSearch\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|c:\\users\\mat\\desktop\\filmsearch\\filmsearch\\theme\\exitbtntheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|solutionrelative:filmsearch\\theme\\exitbtntheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|c:\\users\\mat\\desktop\\filmsearch\\filmsearch\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|solutionrelative:filmsearch\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -11,8 +15,8 @@
       "RelativeMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|solutionrelative:filmsearch\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|c:\\users\\mat\\desktop\\filmsearch\\filmsearch\\theme\\textboxtheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|solutionrelative:filmsearch\\theme\\textboxtheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|c:\\users\\mat\\desktop\\filmsearch\\filmsearch\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D70EDAFE-4552-49F6-AA98-CF56A84D1D26}|FilmSearch\\FilmSearch.csproj|solutionrelative:filmsearch\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,19 +30,31 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TextBoxTheme.xaml",
-              "DocumentMoniker": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\Theme\\TextBoxTheme.xaml",
-              "RelativeDocumentMoniker": "FilmSearch\\Theme\\TextBoxTheme.xaml",
-              "ToolTip": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\Theme\\TextBoxTheme.xaml",
-              "RelativeToolTip": "FilmSearch\\Theme\\TextBoxTheme.xaml",
+              "DocumentIndex": 3,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\App.xaml",
+              "RelativeDocumentMoniker": "FilmSearch\\App.xaml",
+              "ToolTip": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\App.xaml",
+              "RelativeToolTip": "FilmSearch\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-03-07T11:34:25.261Z",
+              "WhenOpened": "2024-03-07T16:27:48.682Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ExitBtnTheme.xaml",
+              "DocumentMoniker": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\Theme\\ExitBtnTheme.xaml",
+              "RelativeDocumentMoniker": "FilmSearch\\Theme\\ExitBtnTheme.xaml",
+              "ToolTip": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\Theme\\ExitBtnTheme.xaml",
+              "RelativeToolTip": "FilmSearch\\Theme\\ExitBtnTheme.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-03-07T16:27:27.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\MainWindow.xaml",
               "RelativeDocumentMoniker": "FilmSearch\\MainWindow.xaml",
@@ -50,15 +66,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "FilmSearch\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\MainWindow.xaml.cs",
               "RelativeToolTip": "FilmSearch\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFMAAAAAAAAA",
+              "ViewState": "AQIAAGUAAAAAAAAAAAAqwH8AAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T10:51:18.434Z",
+              "WhenOpened": "2024-03-07T15:00:20.232Z",
               "EditorCaption": ""
             }
           ]

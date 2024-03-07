@@ -54,3 +54,5 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch_M
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\App.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\TextBoxTheme.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\ContentBoxTheme.baml
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\ExitBtnTheme.baml

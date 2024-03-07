@@ -26,17 +26,54 @@ namespace MovieSearchWPF
             }
         }
 
+        private async Task GetPopularMoviesAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var popularMovies = JsonSerializer.Deserialize<SearchResult>(json);
+
+                    MoviePosters.Clear();
+                    foreach (var movie in popularMovies.results.Take(40))
+                    {
+                        // Sprawdź czy film ma plakat
+                        if (!string.IsNullOrEmpty(movie.poster_path))
+                        {
+                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to retrieve movie data from API.");
+                }
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
             MoviePosters = new ObservableCollection<MoviePoster>();
-            wyszukiwarka.TextChanged += Wyszukiwarka_TextChanged;
+            SearchBox.TextChanged += SearchBox_TextChanged;
+
+            // Pobierz popularne filmy podczas inicjalizacji okna
+            InitializePopularMoviesAsync();
         }
 
-        private async void Wyszukiwarka_TextChanged(object sender, TextChangedEventArgs e)
+        private async Task InitializePopularMoviesAsync()
         {
-            string searchText = wyszukiwarka.Text;
+            await GetPopularMoviesAsync();
+        }
+
+
+        private async void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchBox.Text;
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 MoviePosters.Clear();
@@ -55,7 +92,11 @@ namespace MovieSearchWPF
                     MoviePosters.Clear();
                     foreach (var movie in searchResult.results)
                     {
-                        MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
+                        // Sprawdź czy film ma plakat
+                        if (!string.IsNullOrEmpty(movie.poster_path))
+                        {
+                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
+                        }
                     }
                 }
                 else
@@ -64,20 +105,27 @@ namespace MovieSearchWPF
                 }
             }
         }
-    }
 
-    public class SearchResult
-    {
-        public SearchResultItem[] results { get; set; }
-    }
+        
 
-    public class SearchResultItem
-    {
-        public string poster_path { get; set; }
-    }
+        public class SearchResult
+        {
+            public SearchResultItem[] results { get; set; }
+        }
 
-    public class MoviePoster
-    {
-        public string PosterPath { get; set; }
+        public class SearchResultItem
+        {
+            public string poster_path { get; set; }
+        }
+
+        public class MoviePoster
+        {
+            public string PosterPath { get; set; }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
