@@ -1,128 +1,83 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace MovieSearchWPF
-{/*
-    public partial class MainWindow : Window
+{
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private const string ApiKey = "e1e05e04950c91952d0c0cc0cad4a581";
+        private ObservableCollection<MoviePoster> _moviePosters;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<MoviePoster> MoviePosters
+        {
+            get { return _moviePosters; }
+            set
+            {
+                _moviePosters = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MoviePosters)));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            MoviePosters = new ObservableCollection<MoviePoster>();
+            wyszukiwarka.TextChanged += Wyszukiwarka_TextChanged;
         }
 
-        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        private async void Wyszukiwarka_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string apiKey = "e1e05e04950c91952d0c0cc0cad4a581";
-            string query = SearchTextBox.Text;
-
-            try
+            string searchText = wyszukiwarka.Text;
+            if (string.IsNullOrWhiteSpace(searchText))
             {
-                using (var client = new HttpClient())
+                MoviePosters.Clear();
+                return;
+            }
+
+            using (var client = new HttpClient())
+            {
+                string url = $"https://api.themoviedb.org/3/search/movie?api_key={ApiKey}&query={searchText}";
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage response = await client.GetAsync($"https://api.themoviedb.org/3/search/multi?api_key={apiKey}&query={query}");
+                    var json = await response.Content.ReadAsStringAsync();
+                    var searchResult = JsonSerializer.Deserialize<SearchResult>(json);
 
-                    if (response.IsSuccessStatusCode)
+                    MoviePosters.Clear();
+                    foreach (var movie in searchResult.results)
                     {
-                        string responseData = await response.Content.ReadAsStringAsync();
-
-                        JObject json = JObject.Parse(responseData);
-                        JArray results = (JArray)json["results"];
-
-                        ResultListBox.Items.Clear();
-
-                        foreach (var result in results)
-                        {                         
-                            dynamic detailedResult = await GetDetailedResult((int)result["id"], apiKey);
-
-                            ResultListBox.Items.Add(new
-                            {
-                                Title = (string)result["title"] ?? (string)result["name"],
-                                ReleaseDate = (string)result["release_date"] ?? (string)result["first_air_date"],
-                                Overview = (string)result["overview"],
-                                MediaType = (string)result["media_type"],
-                                PosterPath = (string)result["poster_path"],
-                                VoteAverage = detailedResult?.vote_average ?? 0
-                            });
-                        }
+                        MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
                     }
-                    else
-                    {
-                        ResultListBox.Items.Clear();
-                        ResultListBox.Items.Add($"Wystąpił błąd: {response.StatusCode}");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ResultListBox.Items.Clear();
-                ResultListBox.Items.Add($"Wystąpił błąd: {ex.Message}");
-            }
-        }
-
-        private async Task<dynamic> GetDetailedResult(int id, string apiKey)
-        {
-            dynamic detailedResult = null;
-
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync($"https://api.themoviedb.org/3/movie/{id}?api_key={apiKey}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseData = await response.Content.ReadAsStringAsync();
-                        detailedResult = JObject.Parse(responseData);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while getting detailed result: {ex.Message}");
-            }
-
-            return detailedResult;
-        }
-
-        private async void ResultListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ResultListBox.SelectedItem != null)
-            {
-                dynamic selectedItem = ResultListBox.SelectedItem;
-                DescriptionTextBox.Text = $"Tytuł: {selectedItem.Title}\n\nData premiery: {selectedItem.ReleaseDate}\n\nOpis: {selectedItem.Overview}\n\nTyp: {selectedItem.MediaType}\n\nOcena: {selectedItem.VoteAverage}";
-
-                if (!string.IsNullOrEmpty(selectedItem.PosterPath))
-                {
-                    string baseImageUrl = "https://image.tmdb.org/t/p/w500/";
-                    string imageUrl = baseImageUrl + selectedItem.PosterPath;
-
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(imageUrl, UriKind.Absolute);
-                    bitmap.EndInit();
-
-                    PosterImage.Source = bitmap;
                 }
                 else
                 {
-                    BitmapImage defaultImage = new BitmapImage();
-                    try
-                    {
-                        defaultImage = new BitmapImage(new Uri("pack://application:,,,/Resources/default_poster.jpg"));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"An error occurred while loading the default image: {ex.Message}");
-                    }
-
-                    PosterImage.Source = defaultImage;
+                    MessageBox.Show("Failed to retrieve movie data from API.");
                 }
             }
         }
-    }*/
+    }
+
+    public class SearchResult
+    {
+        public SearchResultItem[] results { get; set; }
+    }
+
+    public class SearchResultItem
+    {
+        public string poster_path { get; set; }
+    }
+
+    public class MoviePoster
+    {
+        public string PosterPath { get; set; }
+    }
 }

@@ -14,25 +14,25 @@
 
     <Border Background="#3a3b3a" CornerRadius="10">
         <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="75"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                <TextBlock Text="MasneFilmy" 
+            <TextBlock Text="MasneFilmy" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" 
                     Foreground="White"
                     FontSize="22"
                     Margin="20,0,0,0"/>
 
-                <StackPanel Grid.Row="1">
-                    
+            <StackPanel Grid.Row="1">
+
                 <RadioButton Content="Movies"
                         Height="50"
                         Foreground="White"
@@ -60,12 +60,37 @@
 
             </StackPanel>
 
-            <TextBox Width="250"
-                     Height="40"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Left"
-                     Margin="5"
-                     Grid.Column="1"/>
+            <TextBox x:Name="SearchBar" 
+                     Width="250" Height="40" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalAlignment="Left" 
+                     Margin="5" 
+                     Grid.Column="1" 
+                     Style="{StaticResource ModernTextbox}"/>
+
+            <ContentControl x:Name="ContentBox" Grid.Row="1" Grid.Column="1" Margin="10">
+                <ListBox ItemsSource="{Binding MoviePosters}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          
+                            <WrapPanel Orientation="Horizontal" Width="710" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                       
+                            <Image Source="{Binding PosterPath}" Width="230" Height="345" Margin="5"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ContentControl>
+
+
+
+
+            <TextBox x:Name="wyszukiwarka" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="200" Height="39"/>
+
+
 
         </Grid>
 

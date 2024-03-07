@@ -35,7 +35,6 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Prism.Wpf.dl
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Wpf.Ui.dll
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.csproj.AssemblyReference.cache
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.baml
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.g.cs
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch_MarkupCompile.cache
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.g.resources
@@ -53,3 +52,5 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\ref\FilmSear
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\MenuButtonTheme.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch_MarkupCompile.lref
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\App.baml
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\TextBoxTheme.baml
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.g.cs
