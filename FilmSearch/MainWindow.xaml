@@ -59,6 +59,18 @@
                         Foreground="White"
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"/>
+                <Label Content="Sort By"/>
+                <CheckBox Content="CheckBox"/>
+                <CheckBox Content="CheckBox"/>
+                <Label Content="Genere"/>
+                <CheckBox Content="CheckBox"/>
+                <CheckBox Content="CheckBox"/>
+                <CheckBox Content="CheckBox"/>
+                <CheckBox Content="CheckBox"/>
+                <CheckBox Content="CheckBox"/>
+                <Label Content="Year"/>
+                <CheckBox Content="CheckBox"/>
+                <CheckBox Content="CheckBox"/>
 
 
             </StackPanel>
