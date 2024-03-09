@@ -27,7 +27,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="MasneFilmy" 
+            <TextBlock Text="Nazwa" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" 
                     Foreground="White"

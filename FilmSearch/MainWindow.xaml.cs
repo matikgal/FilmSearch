@@ -41,7 +41,7 @@ namespace MovieSearchWPF
                     MoviePosters.Clear();
                     foreach (var movie in popularMovies.results.Take(40))
                     {
-                        // Sprawdź czy film ma plakat
+                        //Sprawdzanie czy plakat istnieje
                         if (!string.IsNullOrEmpty(movie.poster_path))
                         {
                             MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
@@ -79,7 +79,8 @@ namespace MovieSearchWPF
             await GetPopularMoviesAsync();
         }
 
-
+        //Searchbox
+        #region SearchBar
         private async void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
@@ -114,7 +115,10 @@ namespace MovieSearchWPF
                 }
             }
         }
+        #endregion
 
+        //Pobiereanie doanych z API
+        #region GetMovie
         private async Task GetMoviesAsync(string url)
         {
             using (var client = new HttpClient())
@@ -140,7 +144,10 @@ namespace MovieSearchWPF
                 }
             }
         }
+        #endregion
 
+        //Funkcje TopRated (Pobieranie danych najlepiej ocenianych filmach oraz programach)
+        #region TopRatedFunctions
         private async Task GetTopRatedMoviesAsync()
         {
             using (var client = new HttpClient())
@@ -155,7 +162,6 @@ namespace MovieSearchWPF
                     MoviePosters.Clear();
                     foreach (var movie in topRatedMovies.results.Take(40))
                     {
-                        // Sprawdź czy film ma plakat
                         if (!string.IsNullOrEmpty(movie.poster_path))
                         {
                             MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
@@ -183,7 +189,6 @@ namespace MovieSearchWPF
                     MoviePosters.Clear();
                     foreach (var show in topRatedTVShows.results.Take(40))
                     {
-                        // Sprawdź czy program telewizyjny ma plakat
                         if (!string.IsNullOrEmpty(show.poster_path))
                         {
                             MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{show.poster_path}" });
@@ -196,16 +201,19 @@ namespace MovieSearchWPF
                 }
             }
         }
+        #endregion
 
+        //Przciski w menu
+        #region LeftMenuBtn
         private async void Top_Rated_Movies_Click(object sender, RoutedEventArgs e)
-{
-    await GetTopRatedMoviesAsync();
-}
+        {
+            await GetTopRatedMoviesAsync();
+        }
 
-private async void Top_Rated_TV_Shows_Click(object sender, RoutedEventArgs e)
-{
-    await GetTopRatedTVShowsAsync();
-}
+        private async void Top_Rated_TV_Shows_Click(object sender, RoutedEventArgs e)
+        {
+            await GetTopRatedTVShowsAsync();
+        }
 
 
         private async void Movies_Click(object sender, RoutedEventArgs e)
@@ -219,34 +227,36 @@ private async void Top_Rated_TV_Shows_Click(object sender, RoutedEventArgs e)
             string url = $"https://api.themoviedb.org/3/discover/tv?api_key={ApiKey}&sort_by=popularity.desc";
             await GetMoviesAsync(url);
         }
+        #endregion
 
-        // Obsługa zdarzenia kliknięcia na przycisku "Exit"
+        //Przyciski funkcji okna (exit,hide,min/max)
+        #region FunctionBtn
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown(); // Wyłączenie aplikacji
+            Application.Current.Shutdown();
         }
 
-        // Obsługa zdarzenia kliknięcia na przycisku "MaxMin"
         private void MaxMin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (WindowState == WindowState.Normal)
             {
-                WindowState = WindowState.Maximized; // Maksymalizacja okna
+                WindowState = WindowState.Maximized;
             }
             else
             {
-                WindowState = WindowState.Normal; // Przywrócenie okna do normalnego rozmiaru
+                WindowState = WindowState.Normal;
             }
         }
 
-        // Obsługa zdarzenia kliknięcia na przycisku "Hide"
         private void Hide_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowState = WindowState.Minimized; // Minimalizacja okna
+            WindowState = WindowState.Minimized;
         }
 
+        #endregion
 
-
+        //Klasy (wyniki wyszukiwania)
+        #region Classes
         public class SearchResult
         {
             public SearchResultItem[] results { get; set; }
@@ -262,6 +272,6 @@ private async void Top_Rated_TV_Shows_Click(object sender, RoutedEventArgs e)
             public string PosterPath { get; set; }
         }
 
-      
+        #endregion
     }
 }
