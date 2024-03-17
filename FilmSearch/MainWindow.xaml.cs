@@ -1,4 +1,7 @@
-﻿using System;
+﻿using IMDb;
+using IMDbApiLib;
+using Microsoft.VisualBasic.Devices;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
@@ -46,6 +49,7 @@ namespace MovieSearchWPF
         }
 
 
+
         //Pobieranie i wyświetlanie filmów z API
         #region ShowMovies
         private async Task GetPopularMoviesAsync()
@@ -62,7 +66,6 @@ namespace MovieSearchWPF
                     MoviePosters.Clear();
                     foreach (var movie in popularMovies.results.Take(40))
                     {
-                        //Sprawdzanie czy plakat istnieje
                         if (!string.IsNullOrEmpty(movie.poster_path))
                         {
                             MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
@@ -249,6 +252,7 @@ namespace MovieSearchWPF
             public string poster_path { get; set; }
         }
 
+        // Dodaj właściwość Title do klasy MoviePoster
         public class MoviePoster
         {
             public string PosterPath { get; set; }

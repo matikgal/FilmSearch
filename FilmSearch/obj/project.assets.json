@@ -27,6 +27,52 @@
           }
         }
       },
+      "HtmlAgilityPack/1.11.54": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "related": ".deps.json;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "related": ".deps.json;.pdb;.xml"
+          }
+        }
+      },
+      "IMDb/1.0.9": {
+        "type": "package",
+        "dependencies": {
+          "HtmlAgilityPack": "1.11.54",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/net7.0/IMDb.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/IMDb.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/net7.0/Icons/IMDb.ico": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "IMDbApiLib/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.ComponentModel.Annotations": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/IMDbApiLib.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/IMDbApiLib.dll": {}
+        }
+      },
       "Microsoft.Xaml.Behaviors.Wpf/1.1.77": {
         "type": "package",
         "compile": {
@@ -89,7 +135,20 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "WPF-UI/3.0.0": {
+      "System.ComponentModel.Annotations/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.ComponentModel.Annotations.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "WPF-UI/3.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-windows7.0/Wpf.Ui.dll": {
@@ -144,6 +203,85 @@
         "lib/wp81/FontAwesome.WIN81.dll",
         "lib/wp81/FontAwesome.WIN81.xml",
         "tools/install.ps1"
+      ]
+    },
+    "HtmlAgilityPack/1.11.54": {
+      "sha512": "bgB79N4urc4D7hrD4R+Qk6CjPiYOfs6vfXNsmw3nCcfQEQvBQGjfAcl5k/tB1ZP1hA0d7xXs0jK8xAXV36IVUg==",
+      "type": "package",
+      "path": "htmlagilitypack/1.11.54",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "htmlagilitypack.1.11.54.nupkg.sha512",
+        "htmlagilitypack.nuspec",
+        "lib/Net35/HtmlAgilityPack.dll",
+        "lib/Net35/HtmlAgilityPack.pdb",
+        "lib/Net35/HtmlAgilityPack.xml",
+        "lib/Net40-client/HtmlAgilityPack.dll",
+        "lib/Net40-client/HtmlAgilityPack.pdb",
+        "lib/Net40-client/HtmlAgilityPack.xml",
+        "lib/Net40/HtmlAgilityPack.XML",
+        "lib/Net40/HtmlAgilityPack.dll",
+        "lib/Net40/HtmlAgilityPack.pdb",
+        "lib/Net45/HtmlAgilityPack.XML",
+        "lib/Net45/HtmlAgilityPack.dll",
+        "lib/Net45/HtmlAgilityPack.pdb",
+        "lib/NetCore45/HtmlAgilityPack.XML",
+        "lib/NetCore45/HtmlAgilityPack.dll",
+        "lib/NetCore45/HtmlAgilityPack.pdb",
+        "lib/netstandard1.3/HtmlAgilityPack.deps.json",
+        "lib/netstandard1.3/HtmlAgilityPack.dll",
+        "lib/netstandard1.3/HtmlAgilityPack.pdb",
+        "lib/netstandard1.3/HtmlAgilityPack.xml",
+        "lib/netstandard1.6/HtmlAgilityPack.deps.json",
+        "lib/netstandard1.6/HtmlAgilityPack.dll",
+        "lib/netstandard1.6/HtmlAgilityPack.pdb",
+        "lib/netstandard1.6/HtmlAgilityPack.xml",
+        "lib/netstandard2.0/HtmlAgilityPack.deps.json",
+        "lib/netstandard2.0/HtmlAgilityPack.dll",
+        "lib/netstandard2.0/HtmlAgilityPack.pdb",
+        "lib/netstandard2.0/HtmlAgilityPack.xml",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.XML",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.XML",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
+        "lib/uap10.0/HtmlAgilityPack.XML",
+        "lib/uap10.0/HtmlAgilityPack.dll",
+        "lib/uap10.0/HtmlAgilityPack.pdb",
+        "lib/uap10.0/HtmlAgilityPack.pri"
+      ]
+    },
+    "IMDb/1.0.9": {
+      "sha512": "hqD2tvXII4r6fA+QmExCBjMWyMDunzLIsOJa7G4Y1WtEBxj767Dm7PMn9odahqCQxcxIhNVoQ8TMW/fBsCLgsw==",
+      "type": "package",
+      "path": "imdb/1.0.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "IMDb.png",
+        "content/Icons/IMDb.ico",
+        "contentFiles/any/net7.0/Icons/IMDb.ico",
+        "imdb.1.0.9.nupkg.sha512",
+        "imdb.nuspec",
+        "lib/net7.0/IMDb.dll",
+        "license.txt",
+        "readme.md"
+      ]
+    },
+    "IMDbApiLib/2.0.0": {
+      "sha512": "WhXaFtkXw8zLPMuy5ejO2WX9j6SBif6EjFwJ5BCpo8jIr984FlItZo4jlhrzGmpDyLq0w9PjvGgQALBg6MGS8w==",
+      "type": "package",
+      "path": "imdbapilib/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "IMDbApiLib_Icon.png",
+        "imdbapilib.2.0.0.nupkg.sha512",
+        "imdbapilib.nuspec",
+        "lib/net46/IMDbApiLib.dll",
+        "lib/netstandard2.0/IMDbApiLib.dll"
       ]
     },
     "Microsoft.Xaml.Behaviors.Wpf/1.1.77": {
@@ -250,10 +388,100 @@
         "readme.txt"
       ]
     },
-    "WPF-UI/3.0.0": {
-      "sha512": "YM4GtOJVRp90x6i4C8PhQc6Ic8zQz/1tt+Wrh5qNBm87jLBq/1LAB812sAlZtiVz5gLN74ERdihKI+/azElPqw==",
+    "System.ComponentModel.Annotations/5.0.0": {
+      "sha512": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
       "type": "package",
-      "path": "wpf-ui/3.0.0",
+      "path": "system.componentmodel.annotations/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net461/System.ComponentModel.Annotations.dll",
+        "lib/netcore50/System.ComponentModel.Annotations.dll",
+        "lib/netstandard1.4/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.0/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.1/System.ComponentModel.Annotations.dll",
+        "lib/netstandard2.1/System.ComponentModel.Annotations.xml",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net461/System.ComponentModel.Annotations.dll",
+        "ref/net461/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/System.ComponentModel.Annotations.dll",
+        "ref/netcore50/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/de/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/es/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/fr/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/it/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/ja/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/ko/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/ru/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netcore50/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/System.ComponentModel.Annotations.dll",
+        "ref/netstandard1.1/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/de/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/es/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/fr/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/it/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/ja/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/ko/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/ru/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.1/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/System.ComponentModel.Annotations.dll",
+        "ref/netstandard1.3/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/de/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/es/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/fr/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/it/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/ja/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/ko/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/ru/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.3/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/System.ComponentModel.Annotations.dll",
+        "ref/netstandard1.4/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/de/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/es/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/fr/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/it/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/ja/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/ko/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/ru/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/zh-hans/System.ComponentModel.Annotations.xml",
+        "ref/netstandard1.4/zh-hant/System.ComponentModel.Annotations.xml",
+        "ref/netstandard2.0/System.ComponentModel.Annotations.dll",
+        "ref/netstandard2.0/System.ComponentModel.Annotations.xml",
+        "ref/netstandard2.1/System.ComponentModel.Annotations.dll",
+        "ref/netstandard2.1/System.ComponentModel.Annotations.xml",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.componentmodel.annotations.5.0.0.nupkg.sha512",
+        "system.componentmodel.annotations.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "WPF-UI/3.0.1": {
+      "sha512": "kV42QrpQoWcL0oM5Ke546aqyn/9sHwDK94XpKZShY1tbaGB0dlJz7cNJwUph8GcTblWlqdP7i6j7UeH7zKDoWQ==",
+      "type": "package",
+      "path": "wpf-ui/3.0.1",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -272,7 +500,7 @@
         "lib/net8.0-windows7.0/Wpf.Ui.dll",
         "lib/net8.0-windows7.0/Wpf.Ui.xml",
         "tools/VisualStudioToolsManifest.xml",
-        "wpf-ui.3.0.0.nupkg.sha512",
+        "wpf-ui.3.0.1.nupkg.sha512",
         "wpf-ui.nuspec",
         "wpfui.png"
       ]
@@ -282,11 +510,13 @@
     "net8.0-windows7.0": [
       "FontAwesome.Sharp >= 6.3.0",
       "FontAwesome.WPF >= 4.7.0.9",
+      "IMDb >= 1.0.9",
+      "IMDbApiLib >= 2.0.0",
       "Microsoft.Xaml.Behaviors.Wpf >= 1.1.77",
       "Newtonsoft.Json >= 13.0.3",
       "Prism.Core >= 8.1.97",
       "Prism.Wpf >= 8.1.97",
-      "WPF-UI >= 3.0.0"
+      "WPF-UI >= 3.0.1"
     ]
   },
   "packageFolders": {
@@ -346,6 +576,14 @@
             "target": "Package",
             "version": "[4.7.0.9, )"
           },
+          "IMDb": {
+            "target": "Package",
+            "version": "[1.0.9, )"
+          },
+          "IMDbApiLib": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "Microsoft.Xaml.Behaviors.Wpf": {
             "target": "Package",
             "version": "[1.1.77, )"
@@ -364,7 +602,7 @@
           },
           "WPF-UI": {
             "target": "Package",
-            "version": "[3.0.0, )"
+            "version": "[3.0.1, )"
           }
         },
         "imports": [

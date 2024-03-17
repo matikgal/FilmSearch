@@ -58,3 +58,8 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\Conten
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\FunctionBtnTheme.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FontAwesome.Sharp.dll
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FontAwesome.WPF.dll
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\SortBoxTheme.baml
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\HtmlAgilityPack.dll
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\IMDb.dll
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\IMDbApiLib.dll
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch_Content.g.cs

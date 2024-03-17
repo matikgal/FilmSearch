@@ -1,16 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "iuXupgvs8C5vEMsXPvxrOjW3oSFM71cdU68nioNU9HZ6dPCjcW0pvkq56AHIiKursvhddg5CVviqHjj017ZxyQ==",
+  "dgSpecHash": "/v/cdflxbdSlHyPN3V8ztFJm3exhon+dkwEDhhncQN4hvrN3OGOMVBdgw+LWT7xC19mINbIoQCzXt2lp0EnIgw==",
   "success": true,
   "projectFilePath": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\FilmSearch.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAT\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\fontawesome.wpf\\4.7.0.9\\fontawesome.wpf.4.7.0.9.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\htmlagilitypack\\1.11.54\\htmlagilitypack.1.11.54.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\imdb\\1.0.9\\imdb.1.0.9.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\imdbapilib\\2.0.0\\imdbapilib.2.0.0.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\prism.wpf\\8.1.97\\prism.wpf.8.1.97.nupkg.sha512",
-    "C:\\Users\\MAT\\.nuget\\packages\\wpf-ui\\3.0.0\\wpf-ui.3.0.0.nupkg.sha512"
+    "C:\\Users\\MAT\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "C:\\Users\\MAT\\.nuget\\packages\\wpf-ui\\3.0.1\\wpf-ui.3.0.1.nupkg.sha512"
   ],
   "logs": [
     {

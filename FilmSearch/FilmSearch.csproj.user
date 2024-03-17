@@ -19,6 +19,9 @@
     <Page Update="Theme\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Theme\SortBoxTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Theme\TextBoxTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
