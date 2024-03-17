@@ -56,3 +56,5 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\TextBo
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.g.cs
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\ContentBoxTheme.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\FunctionBtnTheme.baml
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FontAwesome.Sharp.dll
+C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FontAwesome.WPF.dll

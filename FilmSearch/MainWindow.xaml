@@ -59,18 +59,29 @@
                         Foreground="White"
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"/>
-                <Label Content="Sort By"/>
+
+
+
+                <TextBlock Text="Sort By" 
+                           Style="{StaticResource SortTextBlock}"/>
+                <CheckBox 
+                          Style="{StaticResource SortCheckBox}">
+                    <TextBlock>Revenue  </TextBlock>
+                </CheckBox>
+                <CheckBox Content="Votes"
+                          Style="{StaticResource SortCheckBox}"/>
+                <TextBlock Text="Genere" 
+                           Style="{StaticResource SortTextBlock}"/>
                 <CheckBox Content="CheckBox"/>
                 <CheckBox Content="CheckBox"/>
-                <Label Content="Genere"/>
                 <CheckBox Content="CheckBox"/>
                 <CheckBox Content="CheckBox"/>
                 <CheckBox Content="CheckBox"/>
+                <TextBlock Text="Year" 
+                           Style="{StaticResource SortTextBlock}"/>
                 <CheckBox Content="CheckBox"/>
                 <CheckBox Content="CheckBox"/>
-                <Label Content="Year"/>
-                <CheckBox Content="CheckBox"/>
-                <CheckBox Content="CheckBox"/>
+                
 
 
             </StackPanel>

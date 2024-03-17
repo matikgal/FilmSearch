@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Theme/ContentBoxTheme.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Theme/FunctionBtnTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/SortTextTheme.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -2,26 +2,26 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="ExitButtonStyle" TargetType="Ellipse">
-            <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Margin" Value="0,20,20,0"/>
-            <Setter Property="Stroke" Value="#FFD24C4C"/>
-            <Setter Property="Fill" Value="#FFD24C4C"/>
-            <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Margin" Value="0,20,20,0"/>
+        <Setter Property="Stroke" Value="#FFD24C4C"/>
+        <Setter Property="Fill" Value="#FFD24C4C"/>
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
-        <Style x:Key="MaxMinButtonStyle" TargetType="Ellipse">
-            <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Margin" Value="0,20,50,0"/>
-            <Setter Property="Stroke" Value="#FF5454CA"/>
-            <Setter Property="Cursor" Value="Hand"/>
+    <Style x:Key="MaxMinButtonStyle" TargetType="Ellipse">
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Margin" Value="0,20,50,0"/>
+        <Setter Property="Stroke" Value="#FF5454CA"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Fill" Value="#FF5454CA"/>
     </Style>
 
@@ -37,4 +37,29 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
+    <Style x:Key="SortTextBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="30,10,0,0"/>
+    </Style>
+
+    <Style x:Key="SortCheckBox" TargetType="CheckBox">
+  
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Margin" Value="30,5,0,0"/>
+        <Setter Property="FlowDirection" Value="RightToLeft" />
+        <Setter Property="Background" Value="#292929" />
+        <Setter Property="BorderBrush" Value="#262626" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl FlowDirection="LeftToRight" Content="{Binding}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    
 </ResourceDictionary>
