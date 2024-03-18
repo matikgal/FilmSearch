@@ -42,7 +42,6 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.G
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.AssemblyInfoInputs.cache
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.AssemblyInfo.cs
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.csproj.CoreCompileInputs.cache
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.sourcelink.json
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.csproj.Up2Date
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.dll
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\refint\FilmSearch.dll
