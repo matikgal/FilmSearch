@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/v/cdflxbdSlHyPN3V8ztFJm3exhon+dkwEDhhncQN4hvrN3OGOMVBdgw+LWT7xC19mINbIoQCzXt2lp0EnIgw==",
+  "dgSpecHash": "CjD1Y2uvYhEjLXmRAOaQoj0psJKrGNaEYFbpXvSxws3GaRHECyfcdpLcyjt0PL5rQY1WT6YrNNbSldmldZ/0qg==",
   "success": true,
   "projectFilePath": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\FilmSearch.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAT\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
-    "C:\\Users\\MAT\\.nuget\\packages\\fontawesome.wpf\\4.7.0.9\\fontawesome.wpf.4.7.0.9.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\htmlagilitypack\\1.11.54\\htmlagilitypack.1.11.54.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\imdb\\1.0.9\\imdb.1.0.9.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\imdbapilib\\2.0.0\\imdbapilib.2.0.0.nupkg.sha512",
@@ -16,16 +15,5 @@
     "C:\\Users\\MAT\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\wpf-ui\\3.0.1\\wpf-ui.3.0.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Pakiet „FontAwesome.WPF 4.7.0.9” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0-windows7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
-      "libraryId": "FontAwesome.WPF",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

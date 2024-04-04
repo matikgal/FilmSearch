@@ -1,16 +1,11 @@
-﻿using IMDb;
-using IMDbApiLib;
-using Microsoft.VisualBasic.Devices;
-using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using MovieSearchWPF.Models;
 
 namespace MovieSearchWPF
 {
@@ -31,8 +26,6 @@ namespace MovieSearchWPF
             }
         }
 
-      
-
         public MainWindow()
         {
             InitializeComponent();
@@ -40,79 +33,72 @@ namespace MovieSearchWPF
             MoviePosters = new ObservableCollection<MoviePoster>();
             SearchBox.TextChanged += SearchBox_TextChanged;
 
+            Movies.Click += MenuItem_Click;
+            TV_Shows.Click += MenuItem_Click;
+            Top_Rated_Movies.Click += MenuItem_Click;
+            Top_Rated_TV_Shows.Click += MenuItem_Click;
+
+            BackButton.Click += BackButton_Click;
+
             InitializePopularMoviesAsync();
 
-            Movies.Click += Movies_Click;
-            TV_Shows.Click += TV_Shows_Click;
-            Top_Rated_Movies.Click += Top_Rated_Movies_Click;
-            Top_Rated_TV_Shows.Click += Top_Rated_TV_Shows_Click;
+
         }
 
-
-
-        //Pobieranie i wyświetlanie filmów z API
-        #region ShowMovies
-        private async Task GetPopularMoviesAsync()
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            using (var client = new HttpClient())
-            {
-                string url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-                    var popularMovies = JsonSerializer.Deserialize<SearchResult>(json);
+            string url = string.Empty;
+            if (sender == Movies)
+                url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
+            else if (sender == TV_Shows)
+                url = $"https://api.themoviedb.org/3/discover/tv?api_key={ApiKey}&sort_by=popularity.desc";
+            else if (sender == Top_Rated_Movies)
+                url = $"https://api.themoviedb.org/3/movie/top_rated?api_key={ApiKey}&language=en-US&page=1";
+            else if (sender == Top_Rated_TV_Shows)
+                url = $"https://api.themoviedb.org/3/tv/top_rated?api_key={ApiKey}&language=en-US&page=1";
 
-                    MoviePosters.Clear();
-                    foreach (var movie in popularMovies.results.Take(40))
-                    {
-                        if (!string.IsNullOrEmpty(movie.poster_path))
-                        {
-                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Failed to retrieve movie data from API.");
-                }
-            }
+            if (!string.IsNullOrEmpty(url))
+                await GetMoviesAsync(url);
+
+            MovieDetailsBorder.Visibility = Visibility.Collapsed;
+            BackButton.Visibility = Visibility.Collapsed;
         }
 
-        //Wyświetlanie filmów po starcie programu
-        private async Task InitializePopularMoviesAsync()
-        {
-            await GetPopularMoviesAsync();
-        }
-        #endregion
-
-        //Searchbox
-        #region SearchBar
         private async void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = SearchBox.Text;
+            string searchText = SearchBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 MoviePosters.Clear();
                 return;
             }
 
+            string url = $"https://api.themoviedb.org/3/search/movie?api_key={ApiKey}&query={searchText}";
+            await GetMoviesAsync(url);
+        }
+
+        private async Task GetMoviesAsync(string url)
+        {
             using (var client = new HttpClient())
             {
-                string url = $"https://api.themoviedb.org/3/search/movie?api_key={ApiKey}&query={searchText}";
                 var response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
-                    var searchResult = JsonSerializer.Deserialize<SearchResult>(json);
+                    var result = JsonSerializer.Deserialize<SearchResult>(json);
 
                     MoviePosters.Clear();
-                    foreach (var movie in searchResult.results)
+                    foreach (var item in result.results.Take(40))
                     {
-                        // Sprawdź czy film ma plakat
-                        if (!string.IsNullOrEmpty(movie.poster_path))
+                        if (!string.IsNullOrEmpty(item.poster_path))
                         {
-                            MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
+                            MoviePosters.Add(new MoviePoster
+                            {
+                                PosterPath = $"https://image.tmdb.org/t/p/w500/{item.poster_path}",
+                                Title = item.title,
+                                Description = item.overview,
+                                Rating = item.vote_average
+                            });
                         }
                     }
                 }
@@ -122,115 +108,40 @@ namespace MovieSearchWPF
                 }
             }
         }
-        #endregion
 
-        //Pobiereanie i przetwarzanie doanych z API
-        #region GetMovie
-        private async Task GetMoviesAsync(string url)
+        private async Task InitializePopularMoviesAsync()
         {
-            await GetMediaAsync(url, "movie", movies => movies.results.Select(movie =>
-            {
-                if (!string.IsNullOrEmpty(movie.poster_path))
-                {
-                    MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
-                }
-                return movie;
-            }).Take(40).ToArray(), "Failed to retrieve movie data from API.");
+            await GetMoviesAsync($"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc");
         }
 
-        private async Task GetMediaAsync(string url, string mediaType, Func<SearchResult, SearchResultItem[]> processData, string errorMessage)
+        private void MoviePoster_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            using (var client = new HttpClient())
+            var border = sender as Border;
+            var moviePoster = border?.Tag as MoviePoster;
+            if (moviePoster != null)
             {
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-                    var mediaResult = JsonSerializer.Deserialize<SearchResult>(json);
+                MovieTitleTextBlock.Text = moviePoster.Title;
+                MovieDescriptionTextBlock.Text = $"Opis: {moviePoster.Description}";
+                MovieRatingTextBlock.Text = $"Ocena: {moviePoster.Rating}";
 
-                    MoviePosters.Clear();
-                    processData(mediaResult);
-                }
-                else
-                {
-                    MessageBox.Show(errorMessage);
-                }
+                MovieDetailsBorder.Visibility = Visibility.Visible;
+                BackButton.Visibility = Visibility.Visible;
             }
         }
-        #endregion
 
-        //Funkcje TopRated (Pobieranie danych najlepiej ocenianych filmach oraz programach)
-        #region TopRatedFunctions
-        private async Task GetTopRatedMoviesAsync()
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            string url = $"https://api.themoviedb.org/3/movie/top_rated?api_key={ApiKey}&language=en-US&page=1";
-            await GetMediaAsync(url, "movie", topRatedMovies => topRatedMovies.results.Select(movie =>
-            {
-                if (!string.IsNullOrEmpty(movie.poster_path))
-                {
-                    MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{movie.poster_path}" });
-                }
-                return movie;
-            }).Take(40).ToArray(), "Failed to retrieve movie data from API.");
+            MovieDetailsBorder.Visibility = Visibility.Collapsed;
+            BackButton.Visibility = Visibility.Collapsed;
         }
 
-        private async Task GetTopRatedTVShowsAsync()
-        {
-            string url = $"https://api.themoviedb.org/3/tv/top_rated?api_key={ApiKey}&language=en-US&page=1";
-            await GetMediaAsync(url, "TV show", topRatedTVShows => topRatedTVShows.results.Select(show =>
-            {
-                if (!string.IsNullOrEmpty(show.poster_path))
-                {
-                    MoviePosters.Add(new MoviePoster { PosterPath = $"https://image.tmdb.org/t/p/w500/{show.poster_path}" });
-                }
-                return show;
-            }).Take(40).ToArray(), "Failed to retrieve TV show data from API.");
-        }
-        #endregion
-
-        //Przciski w menu
-        #region LeftMenuBtn
-        private async void Top_Rated_Movies_Click(object sender, RoutedEventArgs e)
-        {
-            await GetTopRatedMoviesAsync();
-        }
-
-        private async void Top_Rated_TV_Shows_Click(object sender, RoutedEventArgs e)
-        {
-            await GetTopRatedTVShowsAsync();
-        }
-
-
-        private async void Movies_Click(object sender, RoutedEventArgs e)
-        {
-            string url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
-            await GetMoviesAsync(url);
-        }
-
-        private async void TV_Shows_Click(object sender, RoutedEventArgs e)
-        {
-            string url = $"https://api.themoviedb.org/3/discover/tv?api_key={ApiKey}&sort_by=popularity.desc";
-            await GetMoviesAsync(url);
-        }
-        #endregion
-
-        //Przyciski funkcji okna (exit,hide,min/max)
-        #region FunctionBtn
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
         private void MaxMin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Normal)
-            {
-                WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                WindowState = WindowState.Normal;
-            }
+            WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
 
         private void Hide_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -238,26 +149,5 @@ namespace MovieSearchWPF
             WindowState = WindowState.Minimized;
         }
 
-        #endregion
-
-        //Klasy (wyniki wyszukiwania, plakat filmu)
-        #region Classes
-        public class SearchResult
-        {
-            public SearchResultItem[] results { get; set; }
-        }
-
-        public class SearchResultItem
-        {
-            public string poster_path { get; set; }
-        }
-
-        // Dodaj właściwość Title do klasy MoviePoster
-        public class MoviePoster
-        {
-            public string PosterPath { get; set; }
-        }
-
-        #endregion
     }
 }

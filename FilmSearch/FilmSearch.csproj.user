@@ -16,10 +16,10 @@
     <Page Update="Theme\FunctionBtnTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Theme\MenuButtonTheme.xaml">
+    <Page Update="Theme\InfoBoxTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Theme\SortBoxTheme.xaml">
+    <Page Update="Theme\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme\TextBoxTheme.xaml">

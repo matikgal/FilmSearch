@@ -53,10 +53,6 @@
               "target": "Package",
               "version": "[6.3.0, )"
             },
-            "FontAwesome.WPF": {
-              "target": "Package",
-              "version": "[4.7.0.9, )"
-            },
             "IMDb": {
               "target": "Package",
               "version": "[1.0.9, )"

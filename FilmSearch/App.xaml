@@ -6,12 +6,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Theme/ContentBoxTheme.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Theme/FunctionBtnTheme.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Theme/SortBoxTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ContentBoxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/FunctionBtnTheme.xaml"/>
+                <ResourceDictionary Source="Theme/InfoBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+ 
         </ResourceDictionary>
     </Application.Resources>
 </Application>

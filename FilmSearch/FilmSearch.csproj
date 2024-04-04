@@ -9,8 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Images\**" />
+    <Compile Remove="MVVM\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <EmbeddedResource Remove="MVVM\**" />
+    <None Remove="Images\**" />
+    <None Remove="MVVM\**" />
+    <Page Remove="Images\**" />
+    <Page Remove="MVVM\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\MAT\.nuget\packages\imdb\1.0.9\contentFiles\any\net7.0\Icons\IMDb.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Rubik-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
-    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="IMDb" Version="1.0.9" />
     <PackageReference Include="IMDbApiLib" Version="2.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
@@ -21,9 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fonts\" />
-    <Folder Include="Images\" />
-    <Folder Include="MVVM\" />
+    <Resource Include="Fonts\Rubik-Regular.ttf" />
   </ItemGroup>
 
 </Project>
