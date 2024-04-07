@@ -53,7 +53,7 @@ namespace FilmSearch {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FilmSearch;V1.0.0.0;component/moviedetailswidnow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FilmSearch;component/moviedetailswidnow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MovieDetailsWidnow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

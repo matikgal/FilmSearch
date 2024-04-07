@@ -121,8 +121,8 @@ namespace MovieSearchWPF
             if (moviePoster != null)
             {
                 MovieTitleTextBlock.Text = moviePoster.Title;
-                MovieDescriptionTextBlock.Text = $"Opis: {moviePoster.Description}";
-                MovieRatingTextBlock.Text = $"Ocena: {moviePoster.Rating}";
+                MovieDescriptionTextBlock.Text = $"{moviePoster.Description}";
+                MovieRatingTextBlock.Text = $"Rating: {moviePoster.Rating}";
 
                 MovieDetailsBorder.Visibility = Visibility.Visible;
                 BackButton.Visibility = Visibility.Visible;
