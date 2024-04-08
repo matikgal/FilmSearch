@@ -8,9 +8,14 @@
         <Setter Property="Height" Value="20"/>
         <Setter Property="Width" Value="20"/>
         <Setter Property="Margin" Value="0,20,20,0"/>
-        <Setter Property="Stroke" Value="#FFD24C4C"/>
-        <Setter Property="Fill" Value="#FFD24C4C"/>
+        <Setter Property="Stroke" Value="#d65c85"/>
+        <Setter Property="Fill" Value="#d65c85"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" Value="#ab4a6a"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="MaxMinButtonStyle" TargetType="Ellipse">
@@ -20,9 +25,14 @@
         <Setter Property="Height" Value="20"/>
         <Setter Property="Width" Value="20"/>
         <Setter Property="Margin" Value="0,20,50,0"/>
-        <Setter Property="Stroke" Value="#FF5454CA"/>
+        <Setter Property="Stroke" Value="#25b4d0"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Fill" Value="#FF5454CA"/>
+        <Setter Property="Fill" Value="#25b4d0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" Value="#1e90a6"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="HideButtonStyle" TargetType="Ellipse">
@@ -32,12 +42,13 @@
         <Setter Property="Height" Value="20"/>
         <Setter Property="Width" Value="20"/>
         <Setter Property="Margin" Value="0,20,80,0"/>
-        <Setter Property="Stroke" Value="#FFD0D053"/>
-        <Setter Property="Fill" Value="#FFD0D053"/>
+        <Setter Property="Stroke" Value="#d6c25c"/>
+        <Setter Property="Fill" Value="#d6c25c"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" Value="#ab9b4a"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
-
-
-
-    
 </ResourceDictionary>

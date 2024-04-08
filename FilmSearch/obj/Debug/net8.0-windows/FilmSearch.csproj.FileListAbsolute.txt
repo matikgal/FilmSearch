@@ -30,9 +30,6 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FilmSearch.d
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FilmSearch.pdb
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Prism.dll
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Prism.Wpf.dll
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\Wpf.Ui.dll
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\FilmSearch.csproj.AssemblyReference.cache
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\App.g.cs
@@ -55,10 +52,6 @@ C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\TextBo
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\MainWindow.g.cs
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\ContentBoxTheme.baml
 C:\Users\MAT\Desktop\FilmSearch\FilmSearch\obj\Debug\net8.0-windows\Theme\FunctionBtnTheme.baml
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\FontAwesome.Sharp.dll
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\HtmlAgilityPack.dll
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\IMDb.dll
-C:\Users\MAT\Desktop\FilmSearch\FilmSearch\bin\Debug\net8.0-windows\IMDbApiLib.dll
 C:\Users\MAT\Desktop\Z gita porbrane\FilmSearch\bin\Debug\net8.0-windows\FilmSearch.exe
 C:\Users\MAT\Desktop\Z gita porbrane\FilmSearch\bin\Debug\net8.0-windows\FilmSearch.deps.json
 C:\Users\MAT\Desktop\Z gita porbrane\FilmSearch\bin\Debug\net8.0-windows\FilmSearch.runtimeconfig.json

@@ -1,10 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    
-    
-    
-    <!-- Style dla ContentControl -->
+   
     <Style TargetType="ContentControl" x:Key="ContentBoxStyle">
         <Setter Property="Grid.Row" Value="1" />
         <Setter Property="Grid.Column" Value="1" />
@@ -23,10 +20,7 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <!-- Stylizacja obrazu -->
-                                <Image Source="{Binding PosterPath}" 
-                                     
-                                />
+                                <Image Source="{Binding PosterPath}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -35,7 +29,6 @@
         </Setter>
     </Style>
 
-    <!-- Style dla Image -->
     <Style TargetType="Image" x:Key="MoviePosterImageStyle">
         <Setter Property="Width" Value="150" />
         <Setter Property="Height" Value="225" />
@@ -51,7 +44,6 @@
         </Setter>
     </Style>
 
-    <!-- Style dla Border -->
     <Style TargetType="Border" x:Key="RoundedBorderStyle">
         <Setter Property="CornerRadius" Value="2" />
         <Setter Property="Effect">

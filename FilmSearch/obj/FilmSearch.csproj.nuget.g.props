@@ -13,18 +13,7 @@
     <SourceRoot Include="C:\Users\MAT\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Content Include="$(NuGetPackageRoot)imdb\1.0.9\contentFiles\any\net7.0\Icons\IMDb.ico" Condition="Exists('$(NuGetPackageRoot)imdb\1.0.9\contentFiles\any\net7.0\Icons\IMDb.ico')">
-      <NuGetPackageId>IMDb</NuGetPackageId>
-      <NuGetPackageVersion>1.0.9</NuGetPackageVersion>
-      <NuGetItemType>Content</NuGetItemType>
-      <Pack>false</Pack>
-      <Private>False</Private>
-      <Link>Icons\IMDb.ico</Link>
-    </Content>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgWPF-UI Condition=" '$(PkgWPF-UI)' == '' ">C:\Users\MAT\.nuget\packages\wpf-ui\3.0.1</PkgWPF-UI>
     <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\MAT\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.77</PkgMicrosoft_Xaml_Behaviors_Wpf>
   </PropertyGroup>
 </Project>

@@ -32,7 +32,6 @@ namespace MovieSearchWPF
             DataContext = this;
             MoviePosters = new ObservableCollection<MoviePoster>();
             SearchBox.TextChanged += SearchBox_TextChanged;
-
             Movies.Click += MenuItem_Click;
             TV_Shows.Click += MenuItem_Click;
             Top_Rated_Movies.Click += MenuItem_Click;
@@ -88,7 +87,7 @@ namespace MovieSearchWPF
                     var result = JsonSerializer.Deserialize<SearchResult>(json);
 
                     MoviePosters.Clear();
-                    foreach (var item in result.results.Take(40))
+                    foreach (var item in result.results.Take(20))
                     {
                         if (!string.IsNullOrEmpty(item.poster_path))
                         {
