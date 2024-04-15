@@ -26,7 +26,7 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
 
             <!-- Menu przycisków -->
             <StackPanel Grid.Row="1">
@@ -42,7 +42,7 @@
                      TextChanged="SearchBox_TextChanged" Grid.Column="1"/>
 
             <!-- ContentBox (plakaty) -->
-            <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Margin="0,0,0,70" Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Visible">
                 <ItemsControl ItemsSource="{Binding MoviePosters}" Cursor="">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -61,6 +61,12 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+
+            <!-- Poprzednia/Nastepna strona -->
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,10">
+                <Button x:Name="PreviousPageButton" Content="Previous Page" Click="PreviousPageButton_Click" Style="{StaticResource CustomButtonStyle}" Margin="5"/>
+                <Button x:Name="NextPageButton" Content="Next Page" Click="NextPageButton_Click" Style="{StaticResource CustomButtonStyle}" Margin="5"/>
+            </StackPanel>
 
             <!-- Informacje o klikniętym elemencie -->
             <Border Style="{StaticResource CommonBorderStyle}" x:Name="MovieDetailsBorder">

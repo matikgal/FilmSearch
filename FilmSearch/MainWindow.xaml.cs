@@ -1,21 +1,21 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MovieSearchWPF.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MovieSearchWPF
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private const string ApiKey = "e1e05e04950c91952d0c0cc0cad4a581";
+
         private ObservableCollection<MoviePoster> _moviePosters;
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         public ObservableCollection<MoviePoster> MoviePosters
         {
             get { return _moviePosters; }
@@ -31,21 +31,22 @@ namespace MovieSearchWPF
             InitializeComponent();
             DataContext = this;
             MoviePosters = new ObservableCollection<MoviePoster>();
+
             SearchBox.TextChanged += SearchBox_TextChanged;
             Movies.Click += MenuItem_Click;
             TV_Shows.Click += MenuItem_Click;
             Top_Rated_Movies.Click += MenuItem_Click;
             Top_Rated_TV_Shows.Click += MenuItem_Click;
-
             BackButton.Click += BackButton_Click;
 
+            Movies.IsChecked = true;
             InitializePopularMoviesAsync();
-
-
         }
 
         private async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            currentPage = 1;
+
             string url = string.Empty;
             if (sender == Movies)
                 url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
@@ -63,12 +64,14 @@ namespace MovieSearchWPF
             BackButton.Visibility = Visibility.Collapsed;
         }
 
+
+        //SearrchBar
         private async void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                MoviePosters.Clear();
+                InitializePopularMoviesAsync();
                 return;
             }
 
@@ -76,43 +79,55 @@ namespace MovieSearchWPF
             await GetMoviesAsync(url);
         }
 
+
+        //Pobieranie filmów
         private async Task GetMoviesAsync(string url)
         {
-            using (var client = new HttpClient())
+            using (var client = new HttpClient()) // Tworzymy klienta HTTP
             {
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
+                HttpResponseMessage response = await client.GetAsync(url); // Wysyłamy zapytanie GET do API filmowego i oczekujemy na odpowiedź
+                if (response.IsSuccessStatusCode) // Sprawdzamy, czy odpowiedź jest poprawna
                 {
-                    var json = await response.Content.ReadAsStringAsync();
-                    var result = JsonSerializer.Deserialize<SearchResult>(json);
-
-                    MoviePosters.Clear();
-                    foreach (var item in result.results.Take(20))
+                    string json = await response.Content.ReadAsStringAsync(); // Odczytujemy odpowiedź jako ciąg JSON
+                    JObject result = JsonConvert.DeserializeObject<JObject>(json); // Deserializujemy odpowiedź JSON do obiektu JObject
+                    MoviePosters.Clear(); // Czyścimy listę plakatów filmowych
+                    if (result.TryGetValue("results", out JToken results)) // Sprawdzamy, czy w odpowiedzi jest pole "results"
                     {
-                        if (!string.IsNullOrEmpty(item.poster_path))
+                        foreach (JToken movie in results.Take(20)) // Iterujemy przez pierwszych 20 filmów w wynikach
                         {
-                            MoviePosters.Add(new MoviePoster
+                            string posterPath = movie["poster_path"]?.ToString(); // Sprawdzamy, czy istnieje ścieżka do plakatu
+                            if (!string.IsNullOrEmpty(posterPath)) // Jeśli ścieżka nie jest pusta
                             {
-                                PosterPath = $"https://image.tmdb.org/t/p/w500/{item.poster_path}",
-                                Title = item.title,
-                                Description = item.overview,
-                                Rating = item.vote_average
-                            });
+                                MoviePosters.Add(new MoviePoster // Tworzymy nowy obiekt MoviePoster i dodajemy go do listy
+                                {
+                                    PosterPath = $"https://image.tmdb.org/t/p/w500/{posterPath}",
+                                    Title = movie["title"]?.ToString(),
+                                    Description = movie["overview"]?.ToString(),
+                                    Rating = (double)(movie["vote_average"] ?? 0.0)
+                                });
+                            }
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Failed to retrieve movie data from API.");
+                    MessageBox.Show("Failed to retrieve movie data from the API.");
                 }
             }
         }
 
+
+
+
+
+        //Wyświelanie popularnych
         private async Task InitializePopularMoviesAsync()
         {
             await GetMoviesAsync($"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc");
         }
 
+
+        //Informacje po kliknięciu
         private void MoviePoster_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var border = sender as Border;
@@ -128,6 +143,42 @@ namespace MovieSearchWPF
             }
         }
 
+
+        //Zmiana stron
+        private int currentPage = 1;
+
+        private async Task LoadMoviesForCurrentPage()
+        {
+            string url = string.Empty;
+
+            if (Movies.IsChecked == true)
+            {
+                url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc&page={currentPage}";
+            }
+            else if (Top_Rated_Movies.IsChecked == true)
+            {
+                url = $"https://api.themoviedb.org/3/movie/top_rated?api_key={ApiKey}&language=en-US&page={currentPage}";
+            }
+            else if (TV_Shows.IsChecked == true)
+            {
+                url = $"https://api.themoviedb.org/3/discover/tv?api_key={ApiKey}&sort_by=popularity.desc&page={currentPage}";
+            }
+            else if (Top_Rated_TV_Shows.IsChecked == true)
+            {
+                url = $"https://api.themoviedb.org/3/tv/top_rated?api_key={ApiKey}&language=en-US&page={currentPage}";
+            }
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                await GetMoviesAsync(url);
+            }
+
+            MovieDetailsBorder.Visibility = Visibility.Collapsed;
+            BackButton.Visibility = Visibility.Collapsed;
+        }
+
+
+        #region Functional Buttons
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MovieDetailsBorder.Visibility = Visibility.Collapsed;
@@ -138,6 +189,7 @@ namespace MovieSearchWPF
         {
             Application.Current.Shutdown();
         }
+
         private void MaxMin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
@@ -148,5 +200,21 @@ namespace MovieSearchWPF
             WindowState = WindowState.Minimized;
         }
 
+        
+        private async void NextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentPage++;
+            await LoadMoviesForCurrentPage();
+        }
+
+        private async void PreviousPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                await LoadMoviesForCurrentPage();
+            }
+        }
+        #endregion
     }
 }
