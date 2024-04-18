@@ -30,16 +30,40 @@
 
             <!-- Menu przycisków -->
             <StackPanel Grid.Row="1">
-                <RadioButton  x:Name="Movies" Content="Movies"  Style="{StaticResource MenuButtonTheme }"/>
-                <RadioButton x:Name="TV_Shows" Content="TV Shows"  Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton x:Name="Top_Rated_Movies" Content="Top Rated Movies" Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton x:Name="Top_Rated_TV_Shows" Content="Top Rated TV Shows" Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton x:Name="Movies" Content="Movies" Click="MenuItem_Click" Style="{StaticResource MenuButtonTheme }"/>
+                <RadioButton x:Name="TV_Shows" Content="TV Shows" Click="MenuItem_Click" Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton x:Name="Top_Rated_Movies" Content="Top Rated Movies" Click="MenuItem_Click" Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton x:Name="Top_Rated_TV_Shows" Content="Top Rated TV Shows"  Style="{StaticResource MenuButtonTheme}"/>
             </StackPanel>
 
+            <!-- Kategorie -->
+            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="0,209,0,14" >
+                    <CheckBox x:Name="ActionCheckBox" Content="Action" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="AdventureCheckBox" Content="Adventure" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="AnimationCheckBox" Content="Animation" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="ComedyCheckBox" Content="Comedy" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="CrimeCheckBox" Content="Crime" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="DocumentaryCheckBox" Content="Documentary" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="DramaCheckBox" Content="Drama" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="FamilyCheckBox" Content="Family" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="FantasyCheckBox" Content="Fantasy" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="HistoryCheckBox" Content="History" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="HorrorCheckBox" Content="Horror" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="MusicCheckBox" Content="Music" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="MysteryCheckBox" Content="Mystery" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="RomanceCheckBox" Content="Romance" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="ScienceFictionCheckBox" Content="Science Fiction" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="ThrillerCheckBox" Content="Thriller" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <CheckBox x:Name="WesternCheckBox" Content="Western" Checked="CategoryCheckBox_Checked" Unchecked="CategoryCheckBox_Unchecked" Style="{StaticResource CheckBoxStyle}"/>
+                    <Button Grid.Row="1" Content="Clear All Categories" Click="ClearAllCategoriesButton_Click"  Style="{StaticResource ButtonStyle}" VerticalAlignment="Top"/>
+            </StackPanel>
+        
+            
             <!-- Wyszukiwarka -->
             <TextBox x:Name="SearchBox" 
                      Style="{StaticResource ModernTextbox}" 
                      TextChanged="SearchBox_TextChanged" Grid.Column="1"/>
+
 
             <!-- ContentBox (plakaty) -->
             <ScrollViewer Margin="0,0,0,70" Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Visible">
