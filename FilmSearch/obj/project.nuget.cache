@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "poRt2U6pVTRVxqEmsihyMNIjhE2HUDn/f8cPamZ8+KVi1tkhRXoMECKkqXB5anRiuJk0S7rl9OHsknbbq1weVg==",
+  "dgSpecHash": "AfdKNWWvSnhMSnGr/ZAjQrDSD0UTkuQwVm0McKDQVFLNtBk7wwCiPkScvv2uh0DjqlacJsmWY5KpwA5ZqkL8EA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MAT\\Desktop\\sad\\FilmSearch-main\\FilmSearch\\FilmSearch.csproj",
+  "projectFilePath": "C:\\Users\\MAT\\Desktop\\FilmSearch\\FilmSearch\\FilmSearch.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAT\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
     "C:\\Users\\MAT\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"

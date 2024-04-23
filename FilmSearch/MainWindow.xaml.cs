@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Windows;
@@ -14,7 +15,9 @@ namespace MovieSearchWPF
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private const string ApiKey = "e1e05e04950c91952d0c0cc0cad4a581";
+
         private ObservableCollection<MoviePoster> _moviePosters;
+
         private List<int> _selectedGenres = new List<int>();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,41 +39,13 @@ namespace MovieSearchWPF
             MoviePosters = new ObservableCollection<MoviePoster>();
 
             AddCategoryCheckBoxEventHandlers();
-
             Movies.IsChecked = true;
-
             LoadMoviesForCurrentPage();
         }
 
-        private void AddCategoryCheckBoxEventHandlers()
-        {
-            var checkBoxes = GetAllCheckBoxes(this);
 
-            foreach (var checkBox in checkBoxes)
-            {
-                checkBox.Checked += CategoryCheckBox_Checked;
-                checkBox.Unchecked += CategoryCheckBox_Unchecked;
-            }
-        }
 
-        private IEnumerable<CheckBox> GetAllCheckBoxes(DependencyObject parent)
-        {
-            var checkBoxList = new List<CheckBox>();
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-            {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                if (child is CheckBox checkBox)
-                {
-                    checkBoxList.Add(checkBox);
-                }
-                else
-                {
-                    checkBoxList.AddRange(GetAllCheckBoxes(child));
-                }
-            }
-            return checkBoxList;
-        }
-
+        //Menu przycisków
         private async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             currentPage = 1;
@@ -92,6 +67,7 @@ namespace MovieSearchWPF
             BackButton.Visibility = Visibility.Collapsed;
         }
 
+        //Dodawanie/usuwanie kategorii
         private async void CategoryCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;
@@ -112,6 +88,7 @@ namespace MovieSearchWPF
             }
         }
 
+        //Kategoria ID
         private int GetGenreIdByName(string categoryName)
         {
             switch (categoryName)
@@ -139,6 +116,7 @@ namespace MovieSearchWPF
             }
         }
 
+        //Filtrowanie po kategorii
         private async void FilterMoviesByGenres()
         {
             if (_selectedGenres.Count == 0)
@@ -154,11 +132,13 @@ namespace MovieSearchWPF
             await GetMoviesAsync(url);
         }
 
+        //SearchBox
         private async void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
             {
+                Movies.IsChecked = true;
                 await InitializePopularMoviesAsync();
                 return;
             }
@@ -167,6 +147,7 @@ namespace MovieSearchWPF
             await GetMoviesAsync(url);
         }
 
+        //Popularne
         private async Task InitializePopularMoviesAsync()
         {
             string url = $"https://api.themoviedb.org/3/discover/movie?api_key={ApiKey}&sort_by=popularity.desc";
@@ -215,6 +196,8 @@ namespace MovieSearchWPF
             }
         }
 
+
+        //Zmiana stron
         private int currentPage = 1;
 
         private async Task LoadMoviesForCurrentPage()
@@ -252,6 +235,38 @@ namespace MovieSearchWPF
             BackButton.Visibility = Visibility.Collapsed;
         }
 
+        //Sprawdzanie zaznaczonych checkboxów
+        private void AddCategoryCheckBoxEventHandlers()
+        {
+            var checkBoxes = GetAllCheckBoxes(this);
+
+            foreach (var checkBox in checkBoxes)
+            {
+                checkBox.Checked += CategoryCheckBox_Checked;
+                checkBox.Unchecked += CategoryCheckBox_Unchecked;
+            }
+        }
+
+        private IEnumerable<CheckBox> GetAllCheckBoxes(DependencyObject parent)
+        {
+            var checkBoxList = new List<CheckBox>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is CheckBox checkBox)
+                {
+                    checkBoxList.Add(checkBox);
+                }
+                else
+                {
+                    checkBoxList.AddRange(GetAllCheckBoxes(child));
+                }
+            }
+            return checkBoxList;
+        }
+
+        //Przyciski funkcyjne
+        #region 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MovieDetailsBorder.Visibility = Visibility.Collapsed;
@@ -299,6 +314,7 @@ namespace MovieSearchWPF
 
             LoadMoviesForCurrentPage();
         }
+        #endregion 
 
         private void MoviePoster_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
