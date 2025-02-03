@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { FaSearch, FaTv, FaFilm, FaRegUser, FaBars } from 'react-icons/fa'
 
+
+
+
+
 export default function Navbar() {
 	const [showSearch, setShowSearch] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
@@ -24,6 +28,7 @@ export default function Navbar() {
 		setShowMenu(false)
 	}
 
+	
 	return (
 		<div className="relative w-full bg-[var(--color-background)] px-5 lg:px-10">
 			{/* Główna belka */}
