@@ -18,13 +18,15 @@ export default function MovieList(){
         async function fetchMovies(){
             try {
             const data = await movieList(page);
-            setMovies(prevMovies => [...prevMovies, ...data]);
-          
+            if(movies.length == 0) setMovies(data);
+            else{
+                setMovies(prevMovies => [ ...prevMovies, ...data])
+            }
             }catch (error) {console.error(error);}
             
         }
         fetchMovies();
-    },[]);
+    },[page]);
     return(
         <div>
             <div>
