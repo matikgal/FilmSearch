@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@layer base {
+	:root {
+		--color-primary: #6a2a98;
+		--color-secondary: #ff3d94;
+		--color-background: #210b4b;
+		--color-accent: #3f1c6d;
+	}
+}
