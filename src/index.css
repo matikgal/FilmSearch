@@ -2,9 +2,9 @@
 
 @layer base {
 	:root {
-		--color-primary: #6a2a98;
-		--color-secondary: #ff3d94;
-		--color-background: #210b4b;
-		--color-accent: #3f1c6d;
+		--color-primary: #5c6575;
+		--color-secondary: #f5e8c7;
+		--color-background: #1e1f2a;
+		--color-accent: #3a3f4b;
 	}
 }

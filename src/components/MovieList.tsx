@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { movieList } from "../Services/ApiService"
+import { useEffect, useState } from 'react'
+import { movieList } from '../Services/ApiService'
 
-interface movie{
-    id: number;
-    title: string,
-    img: string,
-    overview: string,
+interface movie {
+	id: number
+	title: string
+	img: string
+	overview: string
 }
-
-
 
 export default function MovieList(){
     const [movies,setMovies] = useState<movie[]>([]);

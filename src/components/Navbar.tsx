@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { FaSearch, FaTv, FaFilm, FaRegUser, FaBars } from 'react-icons/fa'
 
-
-
-
-
 export default function Navbar() {
 	const [showSearch, setShowSearch] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
@@ -28,16 +24,15 @@ export default function Navbar() {
 		setShowMenu(false)
 	}
 
-	
 	return (
-		<div className="relative w-full bg-[var(--color-background)] px-5 lg:px-10">
+		<div className="relative w-full bg-[var(--color-background)] px-5 lg:px-10 ">
 			{/* Główna belka */}
-			<div className="flex items-center justify-between h-[10vh] lg:h-[10vh] xl:h-[10vh] z-10">
+			<div className="flex items-center justify-between h-[64px] z-40 container mx-auto">
 				{/* Logo */}
 				<h1 className="text-3xl lg:text-5xl text-white">FilmSearch</h1>
 
 				{/* Pasek wyszukiwania na LG */}
-				<label className="hidden md:flex items-center w-[300px] md:w-[400px] px-4 py-2 rounded-full shadow-md bg-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-secondary)]">
+				<label className="hidden md:flex items-center w-[300px] md:w-[400px] px-4 py-2 rounded-lg shadow-md bg-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-secondary)]">
 					<input
 						type="text"
 						placeholder="Search for movies..."
@@ -47,14 +42,14 @@ export default function Navbar() {
 				</label>
 
 				{/* Ikony mobilne (widoczne na lg) */}
-				<div className="flex items-center gap-5 text-white text-2xl xl:hidden">
+				<div className="flex items-center gap-8 text-white text-2xl xl:hidden font-semibold">
 					<FaSearch onClick={toggleSearch} className="cursor-pointer md:hidden" />
 					<FaBars onClick={toggleMenu} className="cursor-pointer" />
 					<FaRegUser onClick={toggleAuth} className="cursor-pointer" />
 				</div>
 
 				{/* Pełne menu i przyciski (widoczne dopiero na XL) */}
-				<div className="hidden xl:flex items-center  gap-10  ">
+				<div className="hidden xl:flex items-center gap-10">
 					<div className="flex gap-5 text-white text-lg font-light">
 						<a
 							href="#"
@@ -87,10 +82,10 @@ export default function Navbar() {
 
 			{/* Dropdown wyszukiwarki */}
 			<div
-				className={`absolute top-[10vh] left-0 w-full bg-[var(--color-background)] p-4 shadow-lg rounded-b-lg transform transition-transform duration-300 ${
+				className={`absolute top-[64px] left-0 w-full bg-[var(--color-background)] p-4 shadow-lg rounded-b-lg transform transition-transform duration-300 ${
 					showSearch ? ' opacity-100' : ' opacity-0'
 				}`}>
-				<label className="flex items-center w-full px-4 py-2 rounded-full shadow-md bg-[var(--color-primary)]">
+				<label className="flex items-center w-full px-4 py-2 rounded-lg shadow-md bg-[var(--color-primary)]">
 					<input
 						type="text"
 						placeholder="Search for movies..."
@@ -102,26 +97,38 @@ export default function Navbar() {
 
 			{/* Dropdown menu (Movies & TV Shows) */}
 			<div
-				className={`absolute top-[10vh] right-10 w-[200px] bg-[var(--color-primary)] p-4 shadow-lg rounded-b-lg transform transition-transform duration-300 ${
+				className={`absolute top-[64px] left-0 text-center w-full bg-[var(--color-accent)] p-4 shadow-lg rounded-b-lg transform transition-transform duration-300 font-semibold${
 					showMenu ? 'opacity-100' : ' opacity-0 '
 				}`}>
-				<a href="#" className="block text-white text-lg py-2 hover:text-[var(--color-secondary)]">
-					Movies
+				<a
+					href="#"
+					className=" text-white text-xl py-2 hover:text-[var(--color-secondary)] flex items-center justify-center gap-x-3 ">
+					<FaFilm />
+					<span>Movies</span>
 				</a>
-				<a href="#" className="block text-white text-lg py-2 hover:text-[var(--color-secondary)]">
-					TV Shows
+				<hr className="h-1 " />
+				<a
+					href="#"
+					className=" text-white text-xl py-2 hover:text-[var(--color-secondary)] flex items-center justify-center gap-x-3">
+					<FaTv />
+					<span>TV Shows</span>
 				</a>
 			</div>
 
 			{/* Dropdown autoryzacji (Sign Up / Log In) */}
 			<div
-				className={`absolute top-[10vh] right-5 w-[200px] bg-[var(--color-primary)] p-4 shadow-lg rounded-b-lg transform transition-transform duration-300 ${
+				className={`absolute top-[64px] left-0 w-full bg-[var(--color-accent)] p-4 shadow-lg rounded-b-lg transform transition-transform duration-300 font-semibold ${
 					showAuth ? ' opacity-100' : 'opacity-0'
 				}`}>
-				<a href="#" className="block text-white text-lg py-2 hover:text-[var(--color-secondary)]">
+				<a
+					href="#"
+					className="flex items-center justify-center gap-x-3 text-white text-lg py-2 hover:text-[var(--color-secondary)]">
 					Sign Up
 				</a>
-				<a href="#" className="block text-white text-lg py-2 hover:text-[var(--color-secondary)]">
+				<hr className="h-1 " />
+				<a
+					href="#"
+					className="flex items-center justify-center gap-x-3 text-white text-lg py-2 hover:text-[var(--color-secondary)]">
 					Log In
 				</a>
 			</div>
