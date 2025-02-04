@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { movieList } from '../Services/ApiService'
+import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6'
+import { MovieSlider } from './MovieSlider'
 
-interface movie {
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Slider from 'react-slick'
+
+interface Movie {
 	id: number
 	title: string
 	img: string
@@ -11,52 +17,66 @@ interface movie {
 }
 
 export default function MovieList() {
-	const [popularMovies, setPopularMovies] = useState<movie[]>([])
-	const [page, setPage] = useState<number>(1)
+	const [movies, setMovies] = useState<Movie[]>([])
+
+	const sliderRef = useRef<Slider | null>(null)
 
 	useEffect(() => {
 		async function fetchMovies() {
 			try {
-				const data = await movieList(page)
-				if (popularMovies.length == 0) setPopularMovies(data)
-				else {
-					setPopularMovies(prevPopularMovies => [...prevPopularMovies, ...data])
-				}
+				const data = await movieList(1)
+				setMovies(data)
 			} catch (error) {
 				console.error(error)
 			}
 		}
 		fetchMovies()
-	}, [page])
+	}, [])
+
+	const movieType = [
+		{
+			type: 'popular',
+			title: 'Popular Movies',
+		},
+		{
+			type: 'now_playing',
+			title: 'Now Playing',
+		},
+		{
+			type: 'top_rated',
+			title: 'Top Rated',
+		},
+		{
+			type: 'upcoming',
+			title: 'Upcoming',
+		},
+	]
+
 	return (
-		<div>
-			<div>
-				<h1></h1>
-				<h1></h1>
-				<ul>
-					{popularMovies.map(movie => (
-						<li key={movie.type}>
-							<p>{movie.title}</p>
-							<p>{movie.id}</p>
-							<p>{movie.type}</p>
-							<div>
-								<img
-									src={movie.img}
-									alt={movie.title}
-									style={{
-										width: '150px',
-										height: 'auto',
-										borderRadius: '10px',
-										boxShadow: '2px 2px 10px rgba(0,0,0,0.3)',
-									}}
-								/>
-							</div>
-							
-						</li>
-					))}
-				</ul>
-				<button onClick={() => setPage(prevPage => prevPage + 1)}>siema</button>
-			</div>
+		<div className="container p-5 mx-auto lg:w-3/5">
+			{movieType.map(({ type, title }) => (
+				<div key={type}>
+					<div className="flex justify-between mx-auto px-2 mt-10">
+						<div className="flex gap-x-2 text-xl font-semibold text-white">
+							<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
+							<h1 className="xl:text-2xl">{title}</h1>
+						</div>
+						<div className="flex gap-x-7">
+							<button
+								onClick={() => sliderRef.current?.slickPrev()}
+								className="text-white bg-gray-800 p-2 rounded-full hover:bg-gray-600 transition">
+								<FaAngleLeft />
+							</button>
+							<button
+								onClick={() => sliderRef.current?.slickNext()}
+								className="text-white bg-gray-800 p-2 rounded-full hover:bg-gray-600 transition">
+								<FaAngleRight />
+							</button>
+						</div>
+					</div>
+					<MovieSlider movies={movies.filter(movie => movie.type === type)} />
+				</div>
+			))}
 		</div>
 	)
 }
