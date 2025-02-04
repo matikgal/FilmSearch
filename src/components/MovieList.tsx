@@ -7,19 +7,20 @@ interface movie {
 	img: string
 	overview: string
 	stars: number
+	type: string
 }
 
 export default function MovieList() {
-	const [movies, setMovies] = useState<movie[]>([])
+	const [popularMovies, setPopularMovies] = useState<movie[]>([])
 	const [page, setPage] = useState<number>(1)
 
 	useEffect(() => {
 		async function fetchMovies() {
 			try {
 				const data = await movieList(page)
-				if (movies.length == 0) setMovies(data)
+				if (popularMovies.length == 0) setPopularMovies(data)
 				else {
-					setMovies(prevMovies => [...prevMovies, ...data])
+					setPopularMovies(prevPopularMovies => [...prevPopularMovies, ...data])
 				}
 			} catch (error) {
 				console.error(error)
@@ -30,13 +31,14 @@ export default function MovieList() {
 	return (
 		<div>
 			<div>
-				<h1>popular</h1>
+				<h1></h1>
 				<h1></h1>
 				<ul>
-					{movies.map(movie => (
-						<li key={movie.id}>
+					{popularMovies.map(movie => (
+						<li key={movie.type}>
 							<p>{movie.title}</p>
 							<p>{movie.id}</p>
+							<p>{movie.type}</p>
 							<div>
 								<img
 									src={movie.img}
@@ -49,7 +51,7 @@ export default function MovieList() {
 									}}
 								/>
 							</div>
-							<p>{movie.overview}</p>
+							
 						</li>
 					))}
 				</ul>
