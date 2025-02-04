@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaSearch, FaTv, FaFilm, FaRegUser, FaBars } from 'react-icons/fa'
 
-export default function Navbar() {
+export default function Navbar({setMovieOrTv}: {setMovieOrTv : (type:string) => void}) {
 	const [showSearch, setShowSearch] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [showAuth, setShowAuth] = useState(false)
@@ -52,12 +52,14 @@ export default function Navbar() {
 				<div className="hidden xl:flex items-center gap-10">
 					<div className="flex gap-5 text-white text-lg font-light">
 						<a
+							onClick={() => setMovieOrTv('movie')}
 							href="#"
 							className="flex items-center space-x-1 cursor-pointer hover:text-[var(--color-secondary)] transition duration-300 hover:scale-105">
 							<FaFilm />
 							<span>Movies</span>
 						</a>
 						<a
+							onClick={() => setMovieOrTv('tv')}
 							href="#"
 							className="flex items-center space-x-1 cursor-pointer hover:text-[var(--color-secondary)] transition duration-300 hover:scale-105">
 							<FaTv />

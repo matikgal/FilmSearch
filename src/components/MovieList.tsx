@@ -16,22 +16,22 @@ interface Movie {
 	type: string
 }
 
-export default function MovieList() {
+export default function MovieList({movieOrTv }: {movieOrTv: string}) {
 	const [movies, setMovies] = useState<Movie[]>([])
-
+	
 	const sliderRef = useRef<Slider | null>(null)
 
 	useEffect(() => {
 		async function fetchMovies() {
 			try {
-				const data = await movieList(1)
+				const data = await movieList(1,movieOrTv)
 				setMovies(data)
 			} catch (error) {
 				console.error(error)
 			}
 		}
 		fetchMovies()
-	}, [])
+	}, [movieOrTv])
 
 	const movieType = [
 		{
@@ -51,10 +51,27 @@ export default function MovieList() {
 			title: 'Upcoming',
 		},
 	]
-
+	const tvType = [
+		{
+			type: 'popular',
+			title: 'Popular Shows',
+		},
+		{
+			type: 'airing_today',
+			title: 'Airing today',
+		},
+		{
+			type: 'on_the_air',
+			title: 'On the Air',
+		},
+		{
+			type: 'top_rated',
+			title: 'top rated',
+		},
+	]
 	return (
 		<div className="container p-5 mx-auto lg:w-3/5">
-			{movieType.map(({ type, title }) => (
+			{(movieOrTv === 'movie' ? movieType : tvType).map(({ type, title }) => (
 				<div key={type}>
 					<div className="flex justify-between mx-auto px-2 mt-10">
 						<div className="flex gap-x-2 text-xl font-semibold text-white">
@@ -79,4 +96,5 @@ export default function MovieList() {
 			))}
 		</div>
 	)
+	
 }

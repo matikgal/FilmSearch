@@ -7,13 +7,21 @@ interface movie {
 	type: string
 }
 
-export async function movieList(page = 1): Promise<movie[]> {
-	const types = ['now_playing', 'popular', 'top_rated', 'upcoming']
-
+export async function movieList(page = 1, movieOrTv='movie'): Promise<movie[]> {
+	let types: string[]
+	
+	
+	if (movieOrTv == 'tv')
+	{
+		 types = ['airing_today', 'on_the_air', 'top_rated', 'popular']
+	}
+	else{
+		 types = ['now_playing', 'popular', 'top_rated', 'upcoming']
+	}
 	const promises = types.map(async type => {
 		try {
-			const url = `https://api.themoviedb.org/3/movie/${type}?language=pl-PL&page=${page}`
-
+			const url = `https://api.themoviedb.org/3/${movieOrTv}/${type}?language=pl-PL&page=${page}`
+			console.log(url)
 			const response = await fetch(url, {
 				method: 'GET',
 				headers: {
