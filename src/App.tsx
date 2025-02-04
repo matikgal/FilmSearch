@@ -10,7 +10,8 @@ function App() {
 			<Navbar />
 			{/* <MovieList /> */}
 			<div className="bg-[var(--color-accent)]">
-				<MovieList />
+				{/*<MovieList /> */}
+				<PopularMovie />
 			</div>
 		</>
 	)
