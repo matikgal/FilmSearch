@@ -3,6 +3,7 @@ interface movie {
 	title: string
 	img: string
 	overview: string
+	stars: number
 }
 
 export async function movieList(page = 1): Promise<movie[]> {
@@ -23,6 +24,7 @@ export async function movieList(page = 1): Promise<movie[]> {
 			title: movie.title,
 			img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
 			overview: movie.overview,
+			stars: movie.vote_average,
 		}))
 	} catch (error) {
 		console.error('błąd', error)
