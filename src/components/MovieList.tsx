@@ -16,15 +16,15 @@ interface Movie {
 	type: string
 }
 
-export default function MovieList({movieOrTv }: {movieOrTv: string}) {
+export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 	const [movies, setMovies] = useState<Movie[]>([])
-	
+
 	const sliderRef = useRef<Slider | null>(null)
 
 	useEffect(() => {
 		async function fetchMovies() {
 			try {
-				const data = await movieList(1,movieOrTv)
+				const data = await movieList(1, movieOrTv)
 				setMovies(data)
 			} catch (error) {
 				console.error(error)
@@ -96,5 +96,4 @@ export default function MovieList({movieOrTv }: {movieOrTv: string}) {
 			))}
 		</div>
 	)
-	
 }
