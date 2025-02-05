@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { FaSearch, FaTv, FaFilm, FaRegUser, FaBars } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
-export default function Navbar({setMovieOrTv}: {setMovieOrTv : (type:string) => void}) {
+export default function Navbar({ setMovieOrTv }: { setMovieOrTv: (type: string) => void }) {
 	const [showSearch, setShowSearch] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [showAuth, setShowAuth] = useState(false)
@@ -29,7 +30,9 @@ export default function Navbar({setMovieOrTv}: {setMovieOrTv : (type:string) => 
 			{/* Główna belka */}
 			<div className="flex items-center justify-between h-[64px] z-40 container mx-auto">
 				{/* Logo */}
-				<h1 className="text-3xl lg:text-5xl text-white">FilmSearch</h1>
+				<Link to="/" className="text-3xl lg:text-5xl text-white cursor-pointer">
+					FilmSearch
+				</Link>
 
 				{/* Pasek wyszukiwania na LG */}
 				<label className="hidden md:flex items-center w-[300px] md:w-[400px] px-4 py-2 rounded-lg shadow-md bg-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-secondary)]">
@@ -70,7 +73,7 @@ export default function Navbar({setMovieOrTv}: {setMovieOrTv : (type:string) => 
 					<div className="flex gap-5 items-center justify-center text-white">
 						<a
 							href="#"
-							className="bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] duration-300 px-4 py-2 rounded-xl font-semibold">
+							className="bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] duration-300 px-4 py-2 rounded-xl font-semibold hover:text-black">
 							Sign Up
 						</a>
 						<a
@@ -103,6 +106,7 @@ export default function Navbar({setMovieOrTv}: {setMovieOrTv : (type:string) => 
 					showMenu ? 'opacity-100' : ' opacity-0 '
 				}`}>
 				<a
+					onClick={() => setMovieOrTv('movie')}
 					href="#"
 					className=" text-white text-xl py-2 hover:text-[var(--color-secondary)] flex items-center justify-center gap-x-3 ">
 					<FaFilm />
@@ -110,6 +114,7 @@ export default function Navbar({setMovieOrTv}: {setMovieOrTv : (type:string) => 
 				</a>
 				<hr className="h-1 " />
 				<a
+					onClick={() => setMovieOrTv('tv')}
 					href="#"
 					className=" text-white text-xl py-2 hover:text-[var(--color-secondary)] flex items-center justify-center gap-x-3">
 					<FaTv />

@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { FaStar } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
+
 import Slider from 'react-slick'
 
 interface Movie {
@@ -18,6 +20,8 @@ interface MovieSliderProps {
 
 export const MovieSlider: React.FC<MovieSliderProps> = ({ movies }) => {
 	const sliderRef = useRef<Slider | null>(null)
+
+	const navigate = useNavigate()
 
 	const settings = {
 		dots: false,
@@ -54,7 +58,7 @@ export const MovieSlider: React.FC<MovieSliderProps> = ({ movies }) => {
 	return (
 		<Slider ref={sliderRef} {...settings} className="mt-5 ">
 			{movies.map(movie => (
-				<div key={movie.id} className="p-2">
+				<div key={movie.id} className="p-2" onClick={() => navigate(`/movie/${movie.id}`)}>
 					<div className="relative">
 						<img src={movie.img} alt={movie.title} className="rounded-sm w-full h-auto shadow-md" />
 						<div className="absolute inset-0 flex items-center justify-center text-4xl text-white opacity-0 hover:opacity-100 duration-300">
