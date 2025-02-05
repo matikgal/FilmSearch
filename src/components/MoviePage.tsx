@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { fetchMovieDetails, fetchMovieCredits, fetchMovieImages, fetchSimilarMovies } from '../Services/ApiService'
 import { CiCalendar, CiClock2 } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 export default function MoviePage() {
 	const { id } = useParams<{ id: string }>()
@@ -12,6 +13,8 @@ export default function MoviePage() {
 	const [credits, setCredits] = useState<any>(null)
 	const [images, setImages] = useState<string[]>([])
 	const [similarMovies, setSimilarMovies] = useState<any[]>([])
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		async function fetchData() {
@@ -70,8 +73,9 @@ export default function MoviePage() {
 					<div key={actor.id} className="flex items-center gap-5">
 						{actor.img && (
 							<div
+							onClick={() => navigate(`/actor/${actor.id}`)}
 								className="w-[60px] h-[60px] rounded-full bg-center bg-cover bg-no-repeat"
-								style={{ backgroundImage: `url(${actor.img})` }}
+								style={{ backgroundImage: `url(${actor.img})`  }}
 							/>
 						)}
 

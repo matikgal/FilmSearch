@@ -18,20 +18,20 @@ interface MovieDetails {
 	genres: string[]
 }
 
-interface Actor {
+interface ActorDetails {
 	id: number
 	name: string
-	character: string
-	img: string | null
+	biography: string
+	gender: number 
+	birthday: string
+	deathday: string
+	img: string
+	place_of_birth: string
+	webpage: string
 }
 
-interface CrewMember {
-	id: number
-	name: string
-	job: string
-}
 
-const API_KEY = '7fe5eb1c5b351c67a82c01791cb9f8a1'
+
 const BASE_URL = 'https://api.themoviedb.org/3'
 const HEADERS = {
 	accept: 'application/json',
@@ -155,5 +155,29 @@ export async function fetchSimilarMovies(movieId: number) {
 	} catch (error) {
 		console.error('Błąd pobierania podobnych filmów:', error)
 		return []
+	}
+}
+
+
+export async function fetchActorDetails(actorId: number): Promise <ActorDetails | null> {
+	try{
+		const response = await fetch(`${BASE_URL}/person/${actorId}language=pl-PL`, { headers: HEADERS })
+		const data = await response.json()
+		return{
+			id: data.id,
+			name: data.name,
+			biography: data.biography,
+			gender: data.gender,
+			birthday: data.birthday,
+			deathday: data.deathday,
+			img:`https://image.tmdb.org/t/p/w300${data.profile_path}`,
+			place_of_birth:data.place_of_birth,
+			webpage:data.homepage
+
+		}
+	}
+	catch (error){
+		console.error("Błąd przy actor details", error);
+		return null;
 	}
 }
