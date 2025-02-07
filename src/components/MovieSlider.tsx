@@ -1,8 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { FaStar } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
-
 import Slider from 'react-slick'
 
 interface Movie {
@@ -21,14 +20,13 @@ interface MovieSliderProps {
 export const MovieSlider: React.FC<MovieSliderProps> = ({ movies }) => {
 	const sliderRef = useRef<Slider | null>(null)
 
-	const navigate = useNavigate()
-
 	const settings = {
 		dots: false,
 		infinite: false,
 		speed: 500,
 		slidesToShow: 5,
 		slidesToScroll: 4,
+		initialSlide: 0,
 		arrows: false,
 		responsive: [
 			{
@@ -54,6 +52,17 @@ export const MovieSlider: React.FC<MovieSliderProps> = ({ movies }) => {
 			},
 		],
 	}
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			if (sliderRef.current) {
+				sliderRef.current.slickGoTo(0)
+			}
+		}, 500)
+
+		return () => clearTimeout(timeout)
+	}, [])
 
 	return (
 		<Slider ref={sliderRef} {...settings} className="mt-5 ">
@@ -63,7 +72,7 @@ export const MovieSlider: React.FC<MovieSliderProps> = ({ movies }) => {
 						<img src={movie.img} alt={movie.title} className="rounded-sm w-full h-auto shadow-md" />
 						<div className="absolute inset-0 flex items-center justify-center text-4xl text-white opacity-0 hover:opacity-100 duration-300">
 							<div className="bg-black absolute inset-0 hover:opacity-20 opacity-0 duration-300 cursor-pointer"></div>
-							<FaPlay className=" cursor-pointer" />
+							<FaPlay className="cursor-pointer" />
 						</div>
 					</div>
 					<p className="flex items-center font-light text-sm mt-2 text-white gap-x-1 px-2">

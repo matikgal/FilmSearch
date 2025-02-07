@@ -7,13 +7,7 @@ import {
 	fetchSimilarMovies,
 	fetchMovieVideos,
 } from '../Services/ApiService'
-import {
-	fetchMovieDetails,
-	fetchMovieCredits,
-	fetchMovieImages,
-	fetchSimilarMovies,
-	fetchMovieVideos,
-} from '../Services/ApiService'
+
 import { CiCalendar, CiClock2 } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa6'
 
@@ -57,7 +51,7 @@ export default function MoviePage() {
 		infinite: false,
 		speed: 500,
 		slidesToShow: 3,
-		slidesToScroll: 1,
+		slidesToScroll: 3,
 		arrows: false,
 		responsive: [
 			{
@@ -133,7 +127,7 @@ export default function MoviePage() {
 						style={{ backgroundImage: `url(${movie.img})` }}
 					/>
 
-					{/* Opis filmu (2/3 szerokości) */}
+					{/* Opis filmu */}
 					<div className="col-span-2 text-white flex flex-col justify-start">
 						<h1 className="text-4xl font-thin">{movie.title}</h1>
 
@@ -151,16 +145,6 @@ export default function MoviePage() {
 							{movie.stars.toFixed(1)} / 10
 						</p>
 
-						{/* Gatunki */}
-						<div className="flex flex-wrap gap-2 mt-2">
-							{movie.genres.map((genre: string, index: number) => (
-								<span
-									key={index}
-									className="bg-[var(--color-secondary)] text-black px-3 py-1 rounded-full text-sm font-semibold">
-									{genre}
-								</span>
-							))}
-						</div>
 						{/* Gatunki */}
 						<div className="flex flex-wrap gap-2 mt-2">
 							{movie.genres.map((genre: string, index: number) => (
@@ -207,7 +191,6 @@ export default function MoviePage() {
 						</div>
 					))}
 				</Slider>
-				{/* Zdjęcia */}
 
 				{/* Podobne filmy */}
 				<h2 className="text-2xl mt-6">Podobne filmy:</h2>
@@ -225,7 +208,6 @@ export default function MoviePage() {
 						</div>
 					))}
 				</Slider>
-				{/* Podobne filmy */}
 			</div>
 		</>
 	)

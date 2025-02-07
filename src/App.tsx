@@ -13,7 +13,7 @@ function App() {
 		<Router>
 			<div className="bg-[var(--color-accent)]">
 				{' '}
-				<Navbar setMovieOrTv={setMovieOrTv} />
+				<Navbar movieOrTv={movieOrTv} setMovieType={setMovieOrTv} />
 				<Routes>
 					<Route path="/" element={<MovieList movieOrTv={movieOrTv} />} />
 					<Route path="/movie/:id" element={<MoviePage />} />

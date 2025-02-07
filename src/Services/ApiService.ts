@@ -173,7 +173,7 @@ export async function fetchSimilarMovies(movieId: number) {
 
 export async function fetchActorDetails(actorId: number): Promise<ActorDetails | null> {
 	try {
-		const response = await fetch(`${BASE_URL}/person/${actorId}language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/person/${actorId}?language=pl-PL`, { headers: HEADERS })
 		const data = await response.json()
 		return {
 			id: data.id,
@@ -189,5 +189,31 @@ export async function fetchActorDetails(actorId: number): Promise<ActorDetails |
 	} catch (error) {
 		console.error('Błąd przy actor details', error)
 		return null
+	}
+}
+
+export async function fetchSearchResults(query: string) {
+	if (!query.trim()) return []
+
+	try {
+		const response = await fetch(`${BASE_URL}/search/multi?query=${query}&language=pl-PL`, { headers: HEADERS })
+		const data = await response.json()
+
+		return data.results
+			.slice(0, 5)
+			.filter((item: any) => item.media_type === 'movie' || item.media_type === 'person')
+			.map((item: any) => ({
+				id: item.id,
+				title: item.title || item.name,
+				media_type: item.media_type,
+				img: item.poster_path
+					? `https://image.tmdb.org/t/p/w200${item.poster_path}`
+					: item.profile_path
+					? `https://image.tmdb.org/t/p/w200${item.profile_path}`
+					: null,
+			}))
+	} catch (error) {
+		console.error('Błąd pobierania wyników wyszukiwania:', error)
+		return []
 	}
 }

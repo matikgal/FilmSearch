@@ -5,7 +5,6 @@ import { MovieSlider } from './MovieSlider'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Slider from 'react-slick'
 
 interface Movie {
 	id: number
@@ -18,8 +17,6 @@ interface Movie {
 
 export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 	const [movies, setMovies] = useState<Movie[]>([])
-
-	const sliderRef = useRef<Slider | null>(null)
 
 	useEffect(() => {
 		async function fetchMovies() {
@@ -69,6 +66,8 @@ export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 			title: 'top rated',
 		},
 	]
+
+	const sliderRef = useRef<Slider | null>(null)
 	return (
 		<div className="container p-5 mx-auto lg:w-3/5">
 			{(movieOrTv === 'movie' ? movieType : tvType).map(({ type, title }) => (
