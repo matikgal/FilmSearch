@@ -7,6 +7,13 @@ import {
 	fetchSimilarMovies,
 	fetchMovieVideos,
 } from '../Services/ApiService'
+import {
+	fetchMovieDetails,
+	fetchMovieCredits,
+	fetchMovieImages,
+	fetchSimilarMovies,
+	fetchMovieVideos,
+} from '../Services/ApiService'
 import { CiCalendar, CiClock2 } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa6'
 
@@ -154,6 +161,16 @@ export default function MoviePage() {
 								</span>
 							))}
 						</div>
+						{/* Gatunki */}
+						<div className="flex flex-wrap gap-2 mt-2">
+							{movie.genres.map((genre: string, index: number) => (
+								<span
+									key={index}
+									className="bg-[var(--color-secondary)] text-black px-3 py-1 rounded-full text-sm font-semibold">
+									{genre}
+								</span>
+							))}
+						</div>
 
 						{/* Opis */}
 						<p className="text-gray-300 mt-4">{movie.overview}</p>
@@ -167,9 +184,9 @@ export default function MoviePage() {
 						<div key={actor.id} className="flex items-center gap-5">
 							{actor.img && (
 								<div
-								onClick={() => navigate(`/actor/${actor.id}`)}
-								className="w-[60px] h-[60px] rounded-full bg-center bg-cover bg-no-repeat"
-									style={{ backgroundImage: `url(${actor.img})`  }}
+									onClick={() => navigate(`/actor/${actor.id}`)}
+									className="w-[60px] h-[60px] rounded-full bg-center bg-cover bg-no-repeat"
+									style={{ backgroundImage: `url(${actor.img})` }}
 								/>
 							)}
 							<div>
@@ -190,6 +207,7 @@ export default function MoviePage() {
 						</div>
 					))}
 				</Slider>
+				{/* Zdjęcia */}
 
 				{/* Podobne filmy */}
 				<h2 className="text-2xl mt-6">Podobne filmy:</h2>
@@ -207,6 +225,7 @@ export default function MoviePage() {
 						</div>
 					))}
 				</Slider>
+				{/* Podobne filmy */}
 			</div>
 		</>
 	)

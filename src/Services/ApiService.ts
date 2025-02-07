@@ -22,15 +22,13 @@ interface ActorDetails {
 	id: number
 	name: string
 	biography: string
-	gender: number 
+	gender: number
 	birthday: string
 	deathday: string
 	img: string
 	place_of_birth: string
 	webpage: string
 }
-
-
 
 const BASE_URL = 'https://api.themoviedb.org/3'
 const HEADERS = {
@@ -173,26 +171,23 @@ export async function fetchSimilarMovies(movieId: number) {
 	}
 }
 
-
-export async function fetchActorDetails(actorId: number): Promise <ActorDetails | null> {
-	try{
+export async function fetchActorDetails(actorId: number): Promise<ActorDetails | null> {
+	try {
 		const response = await fetch(`${BASE_URL}/person/${actorId}language=pl-PL`, { headers: HEADERS })
 		const data = await response.json()
-		return{
+		return {
 			id: data.id,
 			name: data.name,
 			biography: data.biography,
 			gender: data.gender,
 			birthday: data.birthday,
 			deathday: data.deathday,
-			img:`https://image.tmdb.org/t/p/w300${data.profile_path}`,
-			place_of_birth:data.place_of_birth,
-			webpage:data.homepage
-
+			img: `https://image.tmdb.org/t/p/w300${data.profile_path}`,
+			place_of_birth: data.place_of_birth,
+			webpage: data.homepage,
 		}
-	}
-	catch (error){
-		console.error("Błąd przy actor details", error);
-		return null;
+	} catch (error) {
+		console.error('Błąd przy actor details', error)
+		return null
 	}
 }
