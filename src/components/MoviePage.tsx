@@ -7,12 +7,15 @@ import {
 	fetchSimilarMovies,
 	fetchMovieVideos,
 } from '../Services/ApiService'
+import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6'
 
 import { CiCalendar, CiClock2 } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa6'
 
 import Slider from 'react-slick'
 import { useNavigate } from 'react-router-dom'
+import ImgSlider from './ImgSlider'
+import { MovieSlider } from './MovieSlider'
 
 export default function MoviePage() {
 	const { id } = useParams<{ id: string }>()
@@ -20,7 +23,7 @@ export default function MoviePage() {
 
 	const [movie, setMovie] = useState<any>(null)
 	const [credits, setCredits] = useState<any>(null)
-	const [images, setImages] = useState<string[]>([])
+	const [images, setImages] = useState<{ id: string; path: string }[]>([]);
 	const [similarMovies, setSimilarMovies] = useState<any[]>([])
 	const [trailerUrl, setTrailerUrl] = useState<string | null>(null)
 
@@ -184,30 +187,12 @@ export default function MoviePage() {
 				{/* Zdjęcia */}
 
 				<h2 className="text-2xl mt-6">Zdjęcia z filmu:</h2>
-				<Slider {...imageSliderSettings} className="mt-5 flex justify-center space-x-4">
-					{images.map((img, index) => (
-						<div className="p-2">
-							<img key={index} src={img} alt="movie scene" className="w-full  mr-4 rounded-lg" />
-						</div>
-					))}
-				</Slider>
-
+				<div className="flex justify-between mx-auto px-2 mt-10">												
+					</div>			
+					<ImgSlider images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))} />				
 				{/* Podobne filmy */}
 				<h2 className="text-2xl mt-6">Podobne filmy:</h2>
-
-				<Slider {...movieSliderSettings} className="mt-5">
-					{similarMovies.map(movie => (
-						<div className="p-2">
-							<Link to={`/movie/${movie.id}`} key={movie.id} className="text-center flex-1 min-w-0">
-								<div
-									className="w-full aspect-[2/3] bg-center bg-cover bg-no-repeat rounded-lg cursor-pointer hover:scale-105 transition-transform duration-300"
-									style={{ backgroundImage: `url(${movie.img})` }}
-								/>
-								<p className="mt-2 text-sm lg:text-base">{movie.title}</p>
-							</Link>
-						</div>
-					))}
-				</Slider>
+				<MovieSlider movies={similarMovies}/>
 			</div>
 		</>
 	)

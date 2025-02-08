@@ -30,6 +30,7 @@ interface ActorDetails {
 	webpage: string
 }
 
+
 const BASE_URL = 'https://api.themoviedb.org/3'
 const HEADERS = {
 	accept: 'application/json',
@@ -127,15 +128,19 @@ export async function fetchMovieCredits(movieId: number) {
 /**
  * Pobiera zdjęcia z filmu
  */
-export async function fetchMovieImages(movieId: number): Promise<string[]> {
-	try {
-		const response = await fetch(`${BASE_URL}/movie/${movieId}/images`, { headers: HEADERS })
-		const data = await response.json()
-		return data.backdrops.slice(0, 10).map((image: any) => `https://image.tmdb.org/t/p/w500${image.file_path}`)
-	} catch (error) {
-		console.error('Błąd pobierania zdjęć filmu:', error)
-		return []
-	}
+export async function fetchMovieImages(movieId: number): Promise<{ id: string; path: string }[]> {
+    try {
+        const response = await fetch(`${BASE_URL}/movie/${movieId}/images`, { headers: HEADERS });
+        const data = await response.json();
+
+        return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
+            id: String(index),
+            path: image.file_path ? `https://image.tmdb.org/t/p/w300${image.file_path}` : '',
+        }));
+    } catch (error) {
+        console.error('Błąd pobierania zdjęć filmu:', error);
+        return [];
+    }
 }
 
 export async function fetchMovieVideos(movieId: number) {
@@ -156,21 +161,25 @@ export async function fetchMovieVideos(movieId: number) {
 /**
  * Pobiera podobne filmy
  */
-export async function fetchSimilarMovies(movieId: number) {
+  export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
 	try {
-		const response = await fetch(`${BASE_URL}/movie/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS })
-		const data = await response.json()
-		return data.results.slice(0, 10).map((movie: any) => ({
-			id: movie.id,
-			title: movie.title,
-			img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-		}))
+	  const response = await fetch(`${BASE_URL}/movie/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
+	  const data = await response.json();
+	  
+	  return data.results.slice(0, 10).map((movie: any) => ({
+		id: movie.id,
+		title: movie.title,
+		img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+		overview: movie.overview || 'Brak opisu', 
+		stars: movie.vote_average || 0, 
+		type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany', 
+	  }));
 	} catch (error) {
-		console.error('Błąd pobierania podobnych filmów:', error)
-		return []
+	  console.error('Błąd pobierania podobnych filmów:', error);
+	  return [];
 	}
-}
-
+  }
+  
 export async function fetchActorDetails(actorId: number): Promise<ActorDetails | null> {
 	try {
 		const response = await fetch(`${BASE_URL}/person/${actorId}?language=pl-PL`, { headers: HEADERS })

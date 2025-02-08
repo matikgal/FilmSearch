@@ -67,7 +67,7 @@ export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 		},
 	]
 
-	const sliderRef = useRef<Slider | null>(null)
+	
 	return (
 		<div className="container p-5 mx-auto lg:w-3/5">
 			{(movieOrTv === 'movie' ? movieType : tvType).map(({ type, title }) => (
@@ -76,18 +76,6 @@ export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 						<div className="flex gap-x-2 text-xl font-semibold text-white">
 							<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
 							<h1 className="xl:text-2xl">{title}</h1>
-						</div>
-						<div className="flex gap-x-7">
-							<button
-								onClick={() => sliderRef.current?.slickPrev()}
-								className="text-white bg-gray-800 p-2 rounded-full hover:bg-gray-600 transition">
-								<FaAngleLeft />
-							</button>
-							<button
-								onClick={() => sliderRef.current?.slickNext()}
-								className="text-white bg-gray-800 p-2 rounded-full hover:bg-gray-600 transition">
-								<FaAngleRight />
-							</button>
 						</div>
 					</div>
 					<MovieSlider movies={movies.filter(movie => movie.type === type)} />
