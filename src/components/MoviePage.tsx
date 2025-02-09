@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
 	fetchMovieDetails,
 	fetchMovieCredits,
@@ -7,7 +7,6 @@ import {
 	fetchSimilarMovies,
 	fetchMovieVideos,
 } from '../Services/ApiService'
-import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6'
 
 import { CiCalendar, CiClock2 } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa6'
@@ -23,7 +22,7 @@ export default function MoviePage() {
 
 	const [movie, setMovie] = useState<any>(null)
 	const [credits, setCredits] = useState<any>(null)
-	const [images, setImages] = useState<{ id: string; path: string }[]>([]);
+	const [images, setImages] = useState<{ id: string; path: string }[]>([])
 	const [similarMovies, setSimilarMovies] = useState<any[]>([])
 	const [trailerUrl, setTrailerUrl] = useState<string | null>(null)
 
@@ -48,64 +47,6 @@ export default function MoviePage() {
 	}, [movieId])
 
 	if (!movie) return <div className="text-white">Ładowanie...</div>
-
-	const imageSliderSettings = {
-		dots: false,
-		infinite: false,
-		speed: 500,
-		slidesToShow: 3,
-		slidesToScroll: 3,
-		arrows: false,
-		responsive: [
-			{
-				breakpoint: 768,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 1,
-				},
-			},
-			{
-				breakpoint: 480,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
-			},
-		],
-	}
-
-	const movieSliderSettings = {
-		dots: false,
-		infinite: false,
-		speed: 500,
-		slidesToShow: 4,
-		slidesToScroll: 4,
-		arrows: false,
-		variableWidth: false,
-		responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 4,
-					slidesToScroll: 3,
-				},
-			},
-			{
-				breakpoint: 627,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 2,
-				},
-			},
-			{
-				breakpoint: 429,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-				},
-			},
-		],
-	}
 
 	return (
 		<>
@@ -187,12 +128,11 @@ export default function MoviePage() {
 				{/* Zdjęcia */}
 
 				<h2 className="text-2xl mt-6">Zdjęcia z filmu:</h2>
-				<div className="flex justify-between mx-auto px-2 mt-10">												
-					</div>			
-					<ImgSlider images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))} />				
+
+				<ImgSlider images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))} />
 				{/* Podobne filmy */}
 				<h2 className="text-2xl mt-6">Podobne filmy:</h2>
-				<MovieSlider movies={similarMovies}/>
+				<MovieSlider movies={similarMovies} />
 			</div>
 		</>
 	)

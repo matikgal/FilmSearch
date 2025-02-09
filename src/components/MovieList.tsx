@@ -67,9 +67,8 @@ export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 		},
 	]
 
-	
 	return (
-		<div className="container p-5 mx-auto lg:w-3/5">
+		<div className="container p-5 mx-auto lg:w-4/5 xl:w-3/5">
 			{(movieOrTv === 'movie' ? movieType : tvType).map(({ type, title }) => (
 				<div key={type}>
 					<div className="flex justify-between mx-auto px-2 mt-10">
