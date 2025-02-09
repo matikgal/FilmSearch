@@ -101,6 +101,25 @@ export async function fetchMovieDetails(movieId: number): Promise<MovieDetails |
 		return null
 	}
 }
+export async function fetchTvDetails(movieId: number): Promise<MovieDetails | null> {
+	try {
+		const response = await fetch(`${BASE_URL}/tv/${movieId}?language=pl-PL`, { headers: HEADERS })
+		const data = await response.json()
+		return {
+			id: data.id,
+			title: data.name,
+			img: `https://image.tmdb.org/t/p/w500${data.poster_path}`,
+			overview: data.overview,
+			stars: data.vote_average,
+			releaseDate: data.release_date,
+			runtime: data.runtime,
+			genres: data.genres.map((g: any) => g.name),
+		}
+	} catch (error) {
+		console.error('Błąd pobierania szczegółów filmu:', error)
+		return null
+	}
+}
 
 /**
  * Pobiera obsadę i ekipę (aktorzy, reżyserzy, scenarzyści)
@@ -125,12 +144,45 @@ export async function fetchMovieCredits(movieId: number) {
 	}
 }
 
+export async function fetchTvCredits(movieId: number) {
+	try {
+		const response = await fetch(`${BASE_URL}/tv/${movieId}/credits?language=pl-PL`, { headers: HEADERS })
+		const data = await response.json()
+		return {
+			actors: data.cast.slice(0, 10).map((actor: any) => ({
+				id: actor.id,
+				name: actor.name,
+				character: actor.character,
+				img: actor.profile_path ? `https://image.tmdb.org/t/p/w300${actor.profile_path}` : null,
+			})),
+			directors: data.crew.filter((person: any) => person.job === 'Director'),
+			writers: data.crew.filter((person: any) => person.job === 'Screenplay' || person.job === 'Writer'),
+		}
+	} catch (error) {
+		console.error('Błąd pobierania obsady filmu:', error)
+		return null
+	}
+}
 /**
  * Pobiera zdjęcia z filmu
  */
 export async function fetchMovieImages(movieId: number): Promise<{ id: string; path: string }[]> {
     try {
         const response = await fetch(`${BASE_URL}/movie/${movieId}/images`, { headers: HEADERS });
+        const data = await response.json();
+
+        return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
+            id: String(index),
+            path: image.file_path ? `https://image.tmdb.org/t/p/w300${image.file_path}` : '',
+        }));
+    } catch (error) {
+        console.error('Błąd pobierania zdjęć filmu:', error);
+        return [];
+    }
+}
+export async function fetchTvImages(movieId: number): Promise<{ id: string; path: string }[]> {
+    try {
+        const response = await fetch(`${BASE_URL}/tv/${movieId}/images`, { headers: HEADERS });
         const data = await response.json();
 
         return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
@@ -157,6 +209,20 @@ export async function fetchMovieVideos(movieId: number) {
 		return null
 	}
 }
+export async function fetchTvVideos(movieId: number) {
+	try {
+		const response = await fetch(`${BASE_URL}/tv/${movieId}/videos?language=pl-PL`, { headers: HEADERS })
+		const data = await response.json()
+
+		// Znajdź trailer (najlepiej YouTube)
+		const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')
+
+		return trailer ? `https://www.youtube.com/embed/${trailer.key}` : null
+	} catch (error) {
+		console.error('Błąd pobierania wideo:', error)
+		return null
+	}
+}
 
 /**
  * Pobiera podobne filmy
@@ -164,6 +230,24 @@ export async function fetchMovieVideos(movieId: number) {
   export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
 	try {
 	  const response = await fetch(`${BASE_URL}/movie/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
+	  const data = await response.json();
+	  
+	  return data.results.slice(0, 10).map((movie: any) => ({
+		id: movie.id,
+		title: movie.title,
+		img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+		overview: movie.overview || 'Brak opisu', 
+		stars: movie.vote_average || 0, 
+		type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany', 
+	  }));
+	} catch (error) {
+	  console.error('Błąd pobierania podobnych filmów:', error);
+	  return [];
+	}
+  }
+  export async function fetchRecommendedTv(movieId: number): Promise<movie[]> {
+	try {
+	  const response = await fetch(`${BASE_URL}/tv/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
 	  const data = await response.json();
 	  
 	  return data.results.slice(0, 10).map((movie: any) => ({

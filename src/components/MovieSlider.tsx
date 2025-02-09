@@ -15,12 +15,14 @@ interface Movie {
 
 interface MovieSliderProps {
 	movies: Movie[]
+	typ:string
+	movieB:boolean
 }
 
-export function MovieSlider({ movies }: MovieSliderProps) {
+export function MovieSlider({ movies,typ,movieB }: MovieSliderProps) {
 	const sliderRef = useRef<Slider | null>(null)
 	const navigate = useNavigate()
-
+	console.log(movieB)
 	const settings = {
 		dots: false,
 		infinite: true,
@@ -59,24 +61,27 @@ export function MovieSlider({ movies }: MovieSliderProps) {
 			<div className="flex justify-between items-center w-full  px-2">
 				<div className="flex gap-x-2 text-xl font-semibold text-white">
 					<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
-					<h1 className="xl:text-2xl">tyt</h1>
+					<h1 className="xl:text-2xl">{typ}</h1>
 				</div>
 				<div className="gap-5 flex">
 					<button
 						onClick={() => sliderRef.current?.slickPrev()}
-						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
+						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition cursor-pointer">
 						<FaAngleLeft />
 					</button>
 					<button
 						onClick={() => sliderRef.current?.slickNext()}
-						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
+						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition cursor-pointer">
 						<FaAngleRight />
 					</button>
 				</div>
 			</div>
 			<Slider {...settings} ref={sliderRef} className="mt-5">
-				{movies.map(movie => (
-					<div key={movie.id} className="p-2" onClick={() => navigate(`/movie/${movie.id}`)}>
+				{movies.map(movie => (					
+					<div key={movie.id} className="p-2"  onClick={() => {
+						if(movieB==true){navigate(`/movie/${movie.id}`)}
+						else{navigate(`/tv/${movie.id}`)}
+					}}>
 						<div className="relative">
 							<img
 								src={movie.img}

@@ -6,17 +6,19 @@ import {
 	fetchMovieImages,
 	fetchSimilarMovies,
 	fetchMovieVideos,
+	fetchTvDetails,
+	fetchTvCredits,
+	fetchTvImages,
+	fetchTvVideos,
+	fetchRecommendedTv,
 } from '../Services/ApiService'
-
 import { CiCalendar, CiClock2 } from 'react-icons/ci'
 import { FaStar } from 'react-icons/fa6'
-
-import Slider from 'react-slick'
 import { useNavigate } from 'react-router-dom'
 import ImgSlider from './ImgSlider'
 import { MovieSlider } from './MovieSlider'
 
-export default function MoviePage() {
+export default function MoviePage({movieB}: {movieB:boolean}) {
 	const { id } = useParams<{ id: string }>()
 	const movieId = Number(id)
 
@@ -30,17 +32,41 @@ export default function MoviePage() {
 
 	useEffect(() => {
 		async function fetchData() {
-			const movieData = await fetchMovieDetails(movieId)
-			const creditsData = await fetchMovieCredits(movieId)
-			const imagesData = await fetchMovieImages(movieId)
-			const similarMoviesData = await fetchSimilarMovies(movieId)
-			const trailerData = await fetchMovieVideos(movieId)
+			if (movieB==true) {
+				const movieData = await fetchMovieDetails(movieId)
+				setMovie(movieData)
+				const creditsData = await fetchMovieCredits(movieId)
+				setCredits(creditsData)
+				const imagesData = await fetchMovieImages(movieId)
+				setImages(imagesData)
+				const similarMoviesData = await fetchSimilarMovies(movieId)
+				setSimilarMovies(similarMoviesData)
+				const trailerData = await fetchMovieVideos(movieId)
+				setTrailerUrl(trailerData)
+			}
+			else{
+				const movieData = await fetchTvDetails(movieId)
+				setMovie(movieData)
+				const creditsData = await fetchTvCredits(movieId)
+				setCredits(creditsData)
+				const imagesData = await fetchTvImages(movieId)
+				setImages(imagesData)
+				const similarMoviesData = await fetchRecommendedTv(movieId)
+				setSimilarMovies(similarMoviesData)
+				const trailerData = await fetchTvVideos(movieId)
+				setTrailerUrl(trailerData)
+			}
+			
+			
+			
+			
+			
 
-			setMovie(movieData)
-			setCredits(creditsData)
-			setImages(imagesData)
-			setSimilarMovies(similarMoviesData)
-			setTrailerUrl(trailerData)
+			
+			
+			
+			
+			
 		}
 
 		fetchData()
@@ -57,8 +83,7 @@ export default function MoviePage() {
 				</div>
 			) : (
 				<div
-					className="w-full h-[300px] md:h-[500px] bg-center bg-cover bg-no-repeat"
-					style={{ backgroundImage: `url(${movie.img})` }}
+				
 				/>
 			)}
 
@@ -73,7 +98,7 @@ export default function MoviePage() {
 
 					{/* Opis filmu */}
 					<div className="col-span-2 text-white flex flex-col justify-start">
-						<h1 className="text-4xl font-thin">{movie.title}</h1>
+						<h1 className="text-4xl font-bold">{movie.title}</h1>
 
 						<div className="mt-2 flex gap-4">
 							<p className="flex items-center gap-2">
@@ -126,13 +151,9 @@ export default function MoviePage() {
 				</div>
 
 				{/* Zdjęcia */}
-
-				<h2 className="text-2xl mt-6">Zdjęcia z filmu:</h2>
-
-				<ImgSlider images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))} />
+				<ImgSlider images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))} header='Zdjęcia z filmu: ' />
 				{/* Podobne filmy */}
-				<h2 className="text-2xl mt-6">Podobne filmy:</h2>
-				<MovieSlider movies={similarMovies} />
+				<MovieSlider movies={similarMovies} typ='Podobne Filmy' movieB={true}/>
 			</div>
 		</>
 	)

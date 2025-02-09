@@ -34,27 +34,34 @@ interface Image {
 
 interface ImgSliderProps {
 	images: Image[]
+	header:string
 }
 
-export default function ImgSlider({ images }: ImgSliderProps) {
+export default function ImgSlider({ images,header }: ImgSliderProps) {
 	const sliderRef = useRef<Slider>(null)
 
 	return (
 		<div>
-			<div className="flex justify-end w-full gap-5 pr-2">
-				{/* Przycisk do przesuwania w lewo */}
-				<button
-					onClick={() => sliderRef.current?.slickPrev()} // Wywołujemy metodę slickPrev
-					className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
-					<FaAngleLeft />
-				</button>
+			<div className="flex justify-between w-full gap-5  px-2 mt-8">
+				<div className="flex gap-x-2 text-xl font-semibold text-white ">
+					<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
+					<h1 className="xl:text-2xl">{header}</h1>
+				</div>
+				<div className='gap-x-5 flex flex-row'>
+					{/* Przycisk do przesuwania w lewo */}
+					<button
+						onClick={() => sliderRef.current?.slickPrev()} // Wywołujemy metodę slickPrev
+						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
+						<FaAngleLeft />
+					</button>
 
-				{/* Przycisk do przesuwania w prawo */}
-				<button
-					onClick={() => sliderRef.current?.slickNext()} // Wywołujemy metodę slickNext
-					className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
-					<FaAngleRight />
-				</button>
+					{/* Przycisk do przesuwania w prawo */}
+					<button
+						onClick={() => sliderRef.current?.slickNext()} // Wywołujemy metodę slickNext
+						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
+						<FaAngleRight />
+					</button>
+				</div>
 			</div>
 			<Slider {...imageSliderSettings} ref={sliderRef} className="mt-5 flex justify-center space-x-4">
 				{images.map((img, index) => (
