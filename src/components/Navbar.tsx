@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FaSearch, FaBars, FaRegUser, FaFilm, FaTv } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { fetchSearchResults } from '../Services/ApiService'
 
@@ -12,7 +12,7 @@ const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: 
 	const [searchResults, setSearchResults] = useState<
 		{ id: number; name?: string; title?: string; media_type: 'movie' | 'person' }[]
 	>([])
-
+	const navigate = useNavigate()
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth >= 1024) {
@@ -120,14 +120,20 @@ const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: 
 				<div className="hidden xl:flex items-center gap-10">
 					<div className="flex gap-5 text-white text-lg font-light">
 						<button
-							onClick={() => setMovieType('movie')}
+							onClick={() => {
+								setMovieType('movie')
+								navigate('/list')
+							}}
 							className={`flex items-center space-x-1 transition cursor-pointer hover:text-[var(--color-secondary)] duration-150 hover:scale-105`}>
 							<FaFilm />
 							<span>Movies</span>
 						</button>
 
 						<button
-							onClick={() => setMovieType('tv')}
+							onClick={() => {
+								setMovieType('tv')
+								navigate('/list')
+							}}
 							className={`flex items-center space-x-1 transition cursor-pointer hover:text-[var(--color-secondary)] duration-150 hover:scale-105`}>
 							<FaTv />
 							<span>TV Shows</span>

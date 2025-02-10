@@ -16,7 +16,9 @@ function App() {
 				<Navbar movieOrTv={movieOrTv} setMovieType={setMovieOrTv} />
 				<Routes>
 					<Route path="/" element={<MovieList movieOrTv={movieOrTv} />} />
+					<Route path="/list" element={<MovieList movieOrTv={movieOrTv} />} />
 					<Route path="/movie/:id" element={<MoviePage movieB={true}/>} />
+
 					<Route path="/tv/:id" element={<MoviePage movieB={false}/>} />
 					<Route path="/actor/:actorID" element={<ActorPage />} />
 				</Routes>
