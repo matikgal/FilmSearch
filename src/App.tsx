@@ -5,6 +5,7 @@ import ActorPage from './components/ActorPage'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
 	const [movieOrTv, setMovieOrTv] = useState('movie')
@@ -12,6 +13,8 @@ function App() {
 	return (
 		<Router>
 			<div className="bg-[var(--color-accent)]">
+			<ScrollToTop />
+
 				{' '}
 				<Navbar movieOrTv={movieOrTv} setMovieType={setMovieOrTv} />
 				<Routes>

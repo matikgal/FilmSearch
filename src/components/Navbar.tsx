@@ -91,7 +91,7 @@ const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: 
 							{searchResults.map(item => (
 								<li key={item.id}>
 									<Link
-										to={item.media_type === 'movie' ? `/movie/${item.id}` : `/actor/${item.id}`}
+										to={item.media_type === 'movie' ? `/movie/${item.id}` : `/tv/${item.id}`}
 										className="flex items-center gap-3 px-4 py-2 hover:bg-[var(--color-secondary)] hover:text-black"
 										onClick={() => {
 											setSearchTerm('')
@@ -99,7 +99,7 @@ const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: 
 										}}>
 										{item.img && <img src={item.img} alt={item.title} className="w-10 h-14 object-cover rounded" />}
 										<span>
-											{item.title} ({item.media_type === 'movie' ? 'Film' : 'Aktor'})
+											{item.title} ({item.media_type === 'movie' ? 'Film' : 'Serial'})
 										</span>
 									</Link>
 								</li>
@@ -158,7 +158,7 @@ const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: 
 			{/* Dropdown wyszukiwarki */}
 			<div
 				className={classNames(
-					'absolute top-[64px] left-0 w-full bg-[var(--color-background)] p-4 shadow-lg transition-all duration-300',
+					'absolute top-[64px] left-0 w-full bg-[var(--color-background)] p-4 shadow-lg transition-all duration-300 z-20',
 					{
 						'opacity-0 translate-y-[-10px] invisible': !showSearch,
 						'opacity-100 translate-y-0 visible': showSearch,
@@ -177,7 +177,7 @@ const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: 
 							{searchResults.map(item => (
 								<li key={item.id}>
 									<Link
-										to={`/movie/${item.id}`}
+										to={item.media_type === 'movie' ? `/movie/${item.id}` : `/tv/${item.id}`}
 										className="flex items-center gap-3 px-4 py-2 hover:bg-[var(--color-secondary)]"
 										onClick={() => {
 											setSearchTerm('')

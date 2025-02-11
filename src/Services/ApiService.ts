@@ -30,6 +30,15 @@ interface ActorDetails {
 	webpage: string
 }
 
+interface Item {
+    id: number;
+    title?: string;
+    name?: string;
+    media_type: string;
+    poster_path?: string;
+    profile_path?: string;
+    popularity: number;
+}
 
 const BASE_URL = 'https://api.themoviedb.org/3'
 const HEADERS = {
@@ -63,7 +72,7 @@ export async function movieList(page = 1, movieOrTv = 'movie'): Promise<movie[]>
 
 			return data.results.map((movie: any) => ({
 				id: movie.id,
-				title: movie.title,
+				title: movie.title == null ? movie.name : movie.title,
 				img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
 				overview: movie.overview,
 				stars: movie.vote_average,
@@ -234,7 +243,7 @@ export async function fetchTvVideos(movieId: number) {
 	  
 	  return data.results.slice(0, 10).map((movie: any) => ({
 		id: movie.id,
-		title: movie.title,
+		title: movie.title == null ? movie.name : movie.title,
 		img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
 		overview: movie.overview || 'Brak opisu', 
 		stars: movie.vote_average || 0, 
@@ -252,7 +261,7 @@ export async function fetchTvVideos(movieId: number) {
 	  
 	  return data.results.slice(0, 10).map((movie: any) => ({
 		id: movie.id,
-		title: movie.title,
+		title: movie.name,
 		img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
 		overview: movie.overview || 'Brak opisu', 
 		stars: movie.vote_average || 0, 
@@ -289,12 +298,13 @@ export async function fetchSearchResults(query: string) {
 	if (!query.trim()) return []
 
 	try {
-		const response = await fetch(`${BASE_URL}/search/multi?query=${query}&language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/search/multi?query=${query}&language=pl-PL&page=1`, { headers: HEADERS })
 		const data = await response.json()
 
 		return data.results
-			.slice(0, 5)
-			.filter((item: any) => item.media_type === 'movie' || item.media_type === 'person')
+			.slice(0, 10)
+			.filter((item: any) => item.media_type === 'movie' || item.media_type === 'tv')
+			.sort((a: Item, b:Item) => b.popularity - a.popularity)
 			.map((item: any) => ({
 				id: item.id,
 				title: item.title || item.name,
