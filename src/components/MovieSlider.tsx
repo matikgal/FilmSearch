@@ -15,11 +15,11 @@ interface Movie {
 
 interface MovieSliderProps {
 	movies: Movie[]
-	typ:string
-	movieB:boolean
+	typ: string
+	movieB: boolean
 }
 
-export function MovieSlider({ movies,typ,movieB }: MovieSliderProps) {
+export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
 	const sliderRef = useRef<Slider | null>(null)
 	const navigate = useNavigate()
 	console.log(movieB)
@@ -77,11 +77,17 @@ export function MovieSlider({ movies,typ,movieB }: MovieSliderProps) {
 				</div>
 			</div>
 			<Slider {...settings} ref={sliderRef} className="mt-5">
-				{movies.map(movie => (					
-					<div key={movie.id} className="p-2"  onClick={() => {
-						if(movieB==true){navigate(`/movie/${movie.id}`)}
-						else{navigate(`/tv/${movie.id}`)}
-					}}>
+				{movies.map(movie => (
+					<div
+						key={movie.id}
+						className="p-2"
+						onClick={() => {
+							if (movieB == true) {
+								navigate(`/movie/${movie.id}`)
+							} else {
+								navigate(`/tv/${movie.id}`)
+							}
+						}}>
 						<div className="relative">
 							<img
 								src={movie.img}

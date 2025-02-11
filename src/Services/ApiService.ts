@@ -176,40 +176,38 @@ export async function fetchTvCredits(movieId: number) {
  * Pobiera zdjęcia z filmu
  */
 export async function fetchMovieImages(movieId: number): Promise<{ id: string; path: string }[]> {
-    try {
-        const response = await fetch(`${BASE_URL}/movie/${movieId}/images`, { headers: HEADERS });
-        const data = await response.json();
+	try {
+		const response = await fetch(`${BASE_URL}/movie/${movieId}/images`, { headers: HEADERS })
+		const data = await response.json()
 
-        return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
-            id: String(index),
-            path: image.file_path ? `https://image.tmdb.org/t/p/w300${image.file_path}` : '',
-        }));
-    } catch (error) {
-        console.error('Błąd pobierania zdjęć filmu:', error);
-        return [];
-    }
+		return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
+			id: String(index),
+			path: image.file_path ? `https://image.tmdb.org/t/p/w300${image.file_path}` : '',
+		}))
+	} catch (error) {
+		console.error('Błąd pobierania zdjęć filmu:', error)
+		return []
+	}
 }
 export async function fetchTvImages(movieId: number): Promise<{ id: string; path: string }[]> {
-    try {
-        const response = await fetch(`${BASE_URL}/tv/${movieId}/images`, { headers: HEADERS });
-        const data = await response.json();
+	try {
+		const response = await fetch(`${BASE_URL}/tv/${movieId}/images`, { headers: HEADERS })
+		const data = await response.json()
 
-        return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
-            id: String(index),
-            path: image.file_path ? `https://image.tmdb.org/t/p/w300${image.file_path}` : '',
-        }));
-    } catch (error) {
-        console.error('Błąd pobierania zdjęć filmu:', error);
-        return [];
-    }
+		return data.backdrops.slice(0, 10).map((image: any, index: number) => ({
+			id: String(index),
+			path: image.file_path ? `https://image.tmdb.org/t/p/w300${image.file_path}` : '',
+		}))
+	} catch (error) {
+		console.error('Błąd pobierania zdjęć filmu:', error)
+		return []
+	}
 }
 
 export async function fetchMovieVideos(movieId: number) {
 	try {
 		const response = await fetch(`${BASE_URL}/movie/${movieId}/videos?language=pl-PL`, { headers: HEADERS })
 		const data = await response.json()
-
-		// Znajdź trailer (najlepiej YouTube)
 		const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')
 
 		return trailer ? `https://www.youtube.com/embed/${trailer.key}` : null
@@ -223,7 +221,6 @@ export async function fetchTvVideos(movieId: number) {
 		const response = await fetch(`${BASE_URL}/tv/${movieId}/videos?language=pl-PL`, { headers: HEADERS })
 		const data = await response.json()
 
-		// Znajdź trailer (najlepiej YouTube)
 		const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')
 
 		return trailer ? `https://www.youtube.com/embed/${trailer.key}` : null
@@ -236,7 +233,7 @@ export async function fetchTvVideos(movieId: number) {
 /**
  * Pobiera podobne filmy
  */
-  export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
+export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
 	try {
 	  const response = await fetch(`${BASE_URL}/movie/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
 	  const data = await response.json();
@@ -250,11 +247,11 @@ export async function fetchTvVideos(movieId: number) {
 		type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany', 
 	  }));
 	} catch (error) {
-	  console.error('Błąd pobierania podobnych filmów:', error);
-	  return [];
+		console.error('Błąd pobierania podobnych filmów:', error)
+		return []
 	}
-  }
-  export async function fetchRecommendedTv(movieId: number): Promise<movie[]> {
+}
+export async function fetchRecommendedTv(movieId: number): Promise<movie[]> {
 	try {
 	  const response = await fetch(`${BASE_URL}/tv/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
 	  const data = await response.json();
@@ -268,11 +265,11 @@ export async function fetchTvVideos(movieId: number) {
 		type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany', 
 	  }));
 	} catch (error) {
-	  console.error('Błąd pobierania podobnych filmów:', error);
-	  return [];
+		console.error('Błąd pobierania podobnych filmów:', error)
+		return []
 	}
-  }
-  
+}
+
 export async function fetchActorDetails(actorId: number): Promise<ActorDetails | null> {
 	try {
 		const response = await fetch(`${BASE_URL}/person/${actorId}?language=pl-PL`, { headers: HEADERS })

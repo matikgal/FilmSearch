@@ -33,53 +33,51 @@ export default function MovieList({ movieOrTv }: { movieOrTv: string }) {
 		{
 			type: 'popular',
 			title: 'Popular Movies',
-			movie: true
+			movie: true,
 		},
 		{
 			type: 'now_playing',
 			title: 'Now Playing',
-			movie: true
+			movie: true,
 		},
 		{
 			type: 'top_rated',
 			title: 'Top Rated',
-			movie: true
+			movie: true,
 		},
 		{
 			type: 'upcoming',
 			title: 'Upcoming',
-			movie: true
+			movie: true,
 		},
 	]
 	const tvType = [
 		{
 			type: 'popular',
 			title: 'Popular Shows',
-			movie: false
+			movie: false,
 		},
 		{
 			type: 'airing_today',
 			title: 'Airing today',
-			movie: false
+			movie: false,
 		},
 		{
 			type: 'on_the_air',
 			title: 'On the Air',
-			movie: false
+			movie: false,
 		},
 		{
 			type: 'top_rated',
 			title: 'top rated',
-			movie: false
+			movie: false,
 		},
 	]
 
-	
 	return (
-		<div className="container p-5 mx-auto md:w-4/5 lg:w-3/5">
+		<div className="container p-5 mx-auto md:w-4/5 2xl:w-3/5">
 			{(movieOrTv === 'movie' ? movieType : tvType).map(({ type, title, movie }) => (
-				<div key={type}>
-					
+				<div key={type} className="mt-10">
 					<MovieSlider movies={movies.filter(movie => movie.type === type)} typ={title} movieB={movie} />
 				</div>
 			))}

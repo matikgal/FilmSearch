@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { fetchSearchResults } from '../Services/ApiService'
 
-const Navbar = ({ movieOrTv, setMovieType }: { movieOrTv: string; setMovieType: (type: string) => void }) => {
+const Navbar = ({ setMovieType }: { movieOrTv: string; setMovieType: (type: string) => void }) => {
 	const [showSearch, setShowSearch] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [showAuth, setShowAuth] = useState(false)

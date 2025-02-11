@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import ImgSlider from './ImgSlider'
 import { MovieSlider } from './MovieSlider'
 
-export default function MoviePage({movieB}: {movieB:boolean}) {
+export default function MoviePage({ movieB }: { movieB: boolean }) {
 	const { id } = useParams<{ id: string }>()
 	const movieId = Number(id)
 
@@ -32,7 +32,7 @@ export default function MoviePage({movieB}: {movieB:boolean}) {
 
 	useEffect(() => {
 		async function fetchData() {
-			if (movieB==true) {
+			if (movieB == true) {
 				const movieData = await fetchMovieDetails(movieId)
 				setMovie(movieData)
 				const creditsData = await fetchMovieCredits(movieId)
@@ -43,8 +43,7 @@ export default function MoviePage({movieB}: {movieB:boolean}) {
 				setSimilarMovies(similarMoviesData)
 				const trailerData = await fetchMovieVideos(movieId)
 				setTrailerUrl(trailerData)
-			}
-			else{
+			} else {
 				const movieData = await fetchTvDetails(movieId)
 				setMovie(movieData)
 				const creditsData = await fetchTvCredits(movieId)
@@ -56,17 +55,6 @@ export default function MoviePage({movieB}: {movieB:boolean}) {
 				const trailerData = await fetchTvVideos(movieId)
 				setTrailerUrl(trailerData)
 			}
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
 		}
 
 		fetchData()
@@ -82,9 +70,7 @@ export default function MoviePage({movieB}: {movieB:boolean}) {
 					<iframe className="w-full h-full" src={trailerUrl} title={movie.title} allowFullScreen></iframe>
 				</div>
 			) : (
-				<div
-				
-				/>
+				<div />
 			)}
 
 			<div className="p-5 text-white container mx-auto max-w-6xl">
@@ -151,9 +137,12 @@ export default function MoviePage({movieB}: {movieB:boolean}) {
 				</div>
 
 				{/* Zdjęcia */}
-				<ImgSlider images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))} header='Zdjęcia z filmu: ' />
+				<ImgSlider
+					images={images.map(image => ({ link: image.path, alt: `Image ${image.id}` }))}
+					header="Zdjęcia z filmu: "
+				/>
 				{/* Podobne filmy */}
-				<MovieSlider movies={similarMovies} typ='Podobne Filmy' movieB={true}/>
+				<MovieSlider movies={similarMovies} typ="Podobne Filmy" movieB={true} />
 			</div>
 		</>
 	)
