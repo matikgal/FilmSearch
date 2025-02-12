@@ -120,10 +120,12 @@ export default function MoviePage({ movieB }: { movieB: boolean }) {
 				<h2 className="text-2xl mt-6">Obsada:</h2>
 				<div className="flex flex-col gap-4 mt-5 md:grid md:grid-cols-2 lg:grid-cols-3">
 					{credits?.actors.map((actor: any) => (
-						<div key={actor.id} className="flex items-center gap-5">
+						<div
+							key={actor.id}
+							className="flex items-center gap-5 cursor-pointer"
+							onClick={() => navigate(`/actor/${actor.id}`)}>
 							{actor.img && (
 								<div
-									onClick={() => navigate(`/actor/${actor.id}`)}
 									className="w-[60px] h-[60px] rounded-full bg-center bg-cover bg-no-repeat"
 									style={{ backgroundImage: `url(${actor.img})` }}
 								/>

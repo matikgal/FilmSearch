@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react'
 import { FaSearch, FaBars, FaRegUser, FaFilm, FaTv } from 'react-icons/fa'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { fetchSearchResults } from '../Services/ApiService'
+import { useNavbar } from '../components/NavbarContext'
 
 const Navbar = ({ setMovieType }: { movieOrTv: string; setMovieType: (type: string) => void }) => {
-	const [showSearch, setShowSearch] = useState(false)
-	const [showMenu, setShowMenu] = useState(false)
-	const [showAuth, setShowAuth] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
 	const [searchResults, setSearchResults] = useState<
 		{ id: number; name?: string; title?: string; media_type: 'movie' | 'person' }[]
 	>([])
+	const { showSearch, showMenu, showAuth, setShowSearch, setShowMenu, setShowAuth } = useNavbar()
 	const navigate = useNavigate()
 	useEffect(() => {
 		const handleResize = () => {
@@ -24,21 +23,6 @@ const Navbar = ({ setMovieType }: { movieOrTv: string; setMovieType: (type: stri
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
-
-	const location = useLocation()
-
-	useEffect(() => {
-		setShowSearch(false)
-		setShowMenu(false)
-		setShowAuth(false)
-	}, [location.pathname])
-
-	useEffect(() => {
-		if (searchTerm.length > 0) {
-			setShowMenu(false)
-			setShowAuth(false)
-		}
-	}, [searchTerm])
 
 	const toggleSearch = () => {
 		setShowSearch(prev => !prev)
@@ -179,7 +163,7 @@ const Navbar = ({ setMovieType }: { movieOrTv: string; setMovieType: (type: stri
 						'opacity-100 translate-y-0 visible': showSearch,
 					}
 				)}>
-				<label className="relative flex items-center w-full px-4 py-2 bg-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-secondary)]">
+				<label className="relative flex items-center w-full px-4 py-2 bg-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-secondary)] z-20">
 					<input
 						type="text"
 						placeholder="Search for movies..."
