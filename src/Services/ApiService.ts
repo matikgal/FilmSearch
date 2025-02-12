@@ -317,3 +317,22 @@ export async function fetchSearchResults(query: string) {
 		return []
 	}
 }
+
+export async function fetchActorMovies(movieId:number): Promise<movie[]>{
+	try {
+		const response = await fetch(`${BASE_URL}/person/${movieId}/movie_credits?language=pl-PL`, { headers: HEADERS });
+		const data = await response.json();
+		return data.cast.slice(0,10).map((movieData: any) => ({
+			id: movieData.id,
+			title: movieData.title || movieData.name || 'No Title', // Use title or name if available
+			img: `https://image.tmdb.org/t/p/w500${movieData.poster_path}`,
+			overview: movieData.overview || 'Brak opisu',
+			stars: movieData.vote_average || 0,
+			type: movieData.genre_ids.length > 0 ? movieData.genre_ids[0].toString() : 'Nieznany',
+		  }));
+	}
+		catch (error) {
+		  console.error('Błąd pobierania filmów aktora:', error)
+		  return []
+	  }
+}

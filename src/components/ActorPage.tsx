@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchActorDetails } from '../Services/ApiService'
+import { fetchActorDetails,fetchActorMovies } from '../Services/ApiService'
+import { MovieSlider } from './MovieSlider'
 
 export default function ActorPage() {
 	const { actorID } = useParams<{ actorID: string }>()
@@ -18,12 +19,23 @@ export default function ActorPage() {
 		webpage: string
 	}
 
+	interface Movie{
+		id:number
+		title:string
+		img:string
+		overview:string
+		stars:number
+		type:string
+	}
+
 	const [actorDetails, setActorDetails] = useState<ActorDeatails | null>()
+	const [movies,setMovies] = useState<Movie[]>([])
 	useEffect(() => {
 		async function fetchData() {
 			const actorData = await fetchActorDetails(actorId)
-
 			setActorDetails(actorData)
+			const moviesData = await fetchActorMovies(actorId)
+			setMovies(moviesData)
 		}
 		fetchData()
 	}, [])
@@ -76,7 +88,11 @@ export default function ActorPage() {
 						<span className="hidden xl:inline"> {actorDetails.biography}</span>
 					</p>
 				</div>
+				
 			</div>
+			<MovieSlider movies={movies} movieB={true} typ='Znany z: ' />
 		</div>
 	)
 }
+
+
