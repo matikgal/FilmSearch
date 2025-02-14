@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchActorDetails,fetchActorMovies } from '../Services/ApiService'
-import { MovieSlider } from './MovieSlider'
+import { fetchActorDetails, fetchActorMovies } from '../Services/ApiService'
+import { MovieSlider } from '../components/MovieSlider'
 
 export default function ActorPage() {
-	const { actorID } = useParams<{ actorID: string }>()
-	const actorId = Number(actorID)
+	const { id } = useParams<{ id: string }>()
+	const actorId = Number(id)
 
 	interface ActorDeatails {
 		id: number
@@ -19,17 +19,18 @@ export default function ActorPage() {
 		webpage: string
 	}
 
-	interface Movie{
-		id:number
-		title:string
-		img:string
-		overview:string
-		stars:number
-		type:string
+	interface Movie {
+		id: number
+		title: string
+		img: string
+		overview: string
+		stars: number
+		type: string
 	}
 
-	const [actorDetails, setActorDetails] = useState<ActorDeatails | null>()
-	const [movies,setMovies] = useState<Movie[]>([])
+	const [actorDetails, setActorDetails] = useState<ActorDeatails | null>(null)
+	const [movies, setMovies] = useState<Movie[]>([])
+
 	useEffect(() => {
 		async function fetchData() {
 			const actorData = await fetchActorDetails(actorId)
@@ -38,8 +39,7 @@ export default function ActorPage() {
 			setMovies(moviesData)
 		}
 		fetchData()
-	}, [])
-	console.log(actorDetails)
+	}, [actorId])
 
 	if (!actorDetails) {
 		return <p>Ładowanie danych aktora...</p>
@@ -51,17 +51,17 @@ export default function ActorPage() {
 				{/* Lewa część (zdjęcie + info) */}
 				<div className="w-full md:w-2/5 flex md:flex-col ">
 					<div
-						className="bg-center bg-no-repeat bg-contain  min-h-[150px] md:min-h-[400px] h-[30vh] md:h-[40vh] lg:h-[50vh] w-1/2 md:w-full  mt-5"
+						className="bg-center bg-no-repeat bg-contain min-h-[150px] md:min-h-[400px] h-[30vh] md:h-[40vh] lg:h-[50vh] w-1/2 md:w-full mt-5"
 						style={{ backgroundImage: `url(${actorDetails.img})` }}></div>
 
-					<div className="px-5 md:text-center flex  justify-center flex-col mt-5">
+					<div className="px-5 md:text-center flex justify-center flex-col mt-5">
 						<h2 className="font-semibold tracking-wider">Płeć:</h2>
 						<p>
-							{actorDetails.gender == 1
+							{actorDetails.gender === 1
 								? 'Kobieta'
-								: actorDetails.gender == 2
+								: actorDetails.gender === 2
 								? 'Mężczyzna'
-								: actorDetails.gender == 3
+								: actorDetails.gender === 3
 								? 'Non-binary'
 								: 'Brak danych'}
 						</p>
@@ -88,11 +88,8 @@ export default function ActorPage() {
 						<span className="hidden xl:inline"> {actorDetails.biography}</span>
 					</p>
 				</div>
-				
 			</div>
-			<MovieSlider movies={movies} movieB={true} typ='Znany z: ' />
+			<MovieSlider movies={movies} movieB={true} typ="Znany z: " />
 		</div>
 	)
 }
-
-
