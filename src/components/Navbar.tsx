@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FaSearch, FaBars, FaRegUser, FaFilm, FaTv } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { fetchSearchResults } from '../Services/ApiService'
 import { useNavbar } from '../components/NavbarContext'
@@ -23,6 +23,21 @@ const Navbar = ({ setMovieType }: { movieOrTv: string; setMovieType: (type: stri
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
+
+	const location = useLocation()
+
+	useEffect(() => {
+		setShowSearch(false)
+		setShowMenu(false)
+		setShowAuth(false)
+	}, [location.pathname])
+
+	useEffect(() => {
+		if (searchTerm.length > 0) {
+			setShowMenu(false)
+			setShowAuth(false)
+		}
+	}, [searchTerm])
 
 	const toggleSearch = () => {
 		setShowSearch(prev => !prev)
