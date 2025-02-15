@@ -34,10 +34,10 @@ interface Image {
 
 interface ImgSliderProps {
 	images: Image[]
-	header:string
+	header: string
 }
 
-export default function ImgSlider({ images,header }: ImgSliderProps) {
+export default function ImgSlider({ images, header }: ImgSliderProps) {
 	const sliderRef = useRef<Slider>(null)
 
 	return (
@@ -47,17 +47,17 @@ export default function ImgSlider({ images,header }: ImgSliderProps) {
 					<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
 					<h1 className="xl:text-2xl">{header}</h1>
 				</div>
-				<div className='gap-x-5 flex flex-row'>
+				<div className="gap-x-5 flex flex-row">
 					{/* Przycisk do przesuwania w lewo */}
 					<button
-						onClick={() => sliderRef.current?.slickPrev()} // Wywołujemy metodę slickPrev
+						onClick={() => sliderRef.current?.slickPrev()}
 						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
 						<FaAngleLeft />
 					</button>
 
 					{/* Przycisk do przesuwania w prawo */}
 					<button
-						onClick={() => sliderRef.current?.slickNext()} // Wywołujemy metodę slickNext
+						onClick={() => sliderRef.current?.slickNext()}
 						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
 						<FaAngleRight />
 					</button>

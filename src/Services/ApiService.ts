@@ -31,13 +31,13 @@ interface ActorDetails {
 }
 
 interface Item {
-    id: number;
-    title?: string;
-    name?: string;
-    media_type: string;
-    poster_path?: string;
-    profile_path?: string;
-    popularity: number;
+	id: number
+	title?: string
+	name?: string
+	media_type: string
+	poster_path?: string
+	profile_path?: string
+	popularity: number
 }
 
 const BASE_URL = 'https://api.themoviedb.org/3'
@@ -57,7 +57,7 @@ export async function movieList(page = 1, movieOrTv = 'movie'): Promise<movie[]>
 	}
 	const promises = types.map(async type => {
 		try {
-			const url = `https://api.themoviedb.org/3/${movieOrTv}/${type}?language=pl-PL&page=${page}`
+			const url = `https://api.themoviedb.org/3/${movieOrTv}/${type}?language=en-US&page=${page}`
 			console.log(url)
 			const response = await fetch(url, {
 				method: 'GET',
@@ -93,7 +93,7 @@ export async function movieList(page = 1, movieOrTv = 'movie'): Promise<movie[]>
  */
 export async function fetchMovieDetails(movieId: number): Promise<MovieDetails | null> {
 	try {
-		const response = await fetch(`${BASE_URL}/movie/${movieId}?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/movie/${movieId}?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 		return {
 			id: data.id,
@@ -112,7 +112,7 @@ export async function fetchMovieDetails(movieId: number): Promise<MovieDetails |
 }
 export async function fetchTvDetails(movieId: number): Promise<MovieDetails | null> {
 	try {
-		const response = await fetch(`${BASE_URL}/tv/${movieId}?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/tv/${movieId}?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 		return {
 			id: data.id,
@@ -135,7 +135,7 @@ export async function fetchTvDetails(movieId: number): Promise<MovieDetails | nu
  */
 export async function fetchMovieCredits(movieId: number) {
 	try {
-		const response = await fetch(`${BASE_URL}/movie/${movieId}/credits?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/movie/${movieId}/credits?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 		return {
 			actors: data.cast.slice(0, 10).map((actor: any) => ({
@@ -155,7 +155,7 @@ export async function fetchMovieCredits(movieId: number) {
 
 export async function fetchTvCredits(movieId: number) {
 	try {
-		const response = await fetch(`${BASE_URL}/tv/${movieId}/credits?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/tv/${movieId}/credits?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 		return {
 			actors: data.cast.slice(0, 10).map((actor: any) => ({
@@ -206,7 +206,7 @@ export async function fetchTvImages(movieId: number): Promise<{ id: string; path
 
 export async function fetchMovieVideos(movieId: number) {
 	try {
-		const response = await fetch(`${BASE_URL}/movie/${movieId}/videos?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/movie/${movieId}/videos?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 		const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')
 
@@ -218,7 +218,7 @@ export async function fetchMovieVideos(movieId: number) {
 }
 export async function fetchTvVideos(movieId: number) {
 	try {
-		const response = await fetch(`${BASE_URL}/tv/${movieId}/videos?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/tv/${movieId}/videos?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 
 		const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')
@@ -235,17 +235,17 @@ export async function fetchTvVideos(movieId: number) {
  */
 export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
 	try {
-	  const response = await fetch(`${BASE_URL}/movie/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
-	  const data = await response.json();
-	  
-	  return data.results.slice(0, 10).map((movie: any) => ({
-		id: movie.id,
-		title: movie.title == null ? movie.name : movie.title,
-		img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-		overview: movie.overview || 'Brak opisu', 
-		stars: movie.vote_average || 0, 
-		type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany', 
-	  }));
+		const response = await fetch(`${BASE_URL}/movie/${movieId}/similar?language=en-US&page=1`, { headers: HEADERS })
+		const data = await response.json()
+
+		return data.results.slice(0, 10).map((movie: any) => ({
+			id: movie.id,
+			title: movie.title == null ? movie.name : movie.title,
+			img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+			overview: movie.overview || 'Brak opisu',
+			stars: movie.vote_average || 0,
+			type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany',
+		}))
 	} catch (error) {
 		console.error('Błąd pobierania podobnych filmów:', error)
 		return []
@@ -253,17 +253,17 @@ export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
 }
 export async function fetchRecommendedTv(movieId: number): Promise<movie[]> {
 	try {
-	  const response = await fetch(`${BASE_URL}/tv/${movieId}/similar?language=pl-PL&page=1`, { headers: HEADERS });
-	  const data = await response.json();
-	  
-	  return data.results.slice(0, 10).map((movie: any) => ({
-		id: movie.id,
-		title: movie.name,
-		img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-		overview: movie.overview || 'Brak opisu', 
-		stars: movie.vote_average || 0, 
-		type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany', 
-	  }));
+		const response = await fetch(`${BASE_URL}/tv/${movieId}/similar?language=en-US&page=1`, { headers: HEADERS })
+		const data = await response.json()
+
+		return data.results.slice(0, 10).map((movie: any) => ({
+			id: movie.id,
+			title: movie.name,
+			img: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+			overview: movie.overview || 'Brak opisu',
+			stars: movie.vote_average || 0,
+			type: movie.genre_ids.length > 0 ? movie.genre_ids[0].toString() : 'Nieznany',
+		}))
 	} catch (error) {
 		console.error('Błąd pobierania podobnych filmów:', error)
 		return []
@@ -272,7 +272,7 @@ export async function fetchRecommendedTv(movieId: number): Promise<movie[]> {
 
 export async function fetchActorDetails(actorId: number): Promise<ActorDetails | null> {
 	try {
-		const response = await fetch(`${BASE_URL}/person/${actorId}?language=pl-PL`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/person/${actorId}?language=en-US`, { headers: HEADERS })
 		const data = await response.json()
 		return {
 			id: data.id,
@@ -295,13 +295,13 @@ export async function fetchSearchResults(query: string) {
 	if (!query.trim()) return []
 
 	try {
-		const response = await fetch(`${BASE_URL}/search/multi?query=${query}&language=pl-PL&page=1`, { headers: HEADERS })
+		const response = await fetch(`${BASE_URL}/search/multi?query=${query}&language=en-US&page=1`, { headers: HEADERS })
 		const data = await response.json()
 
 		return data.results
 			.slice(0, 10)
 			.filter((item: any) => item.media_type === 'movie' || item.media_type === 'tv')
-			.sort((a: Item, b:Item) => b.popularity - a.popularity)
+			.sort((a: Item, b: Item) => b.popularity - a.popularity)
 			.map((item: any) => ({
 				id: item.id,
 				title: item.title || item.name,
@@ -318,21 +318,20 @@ export async function fetchSearchResults(query: string) {
 	}
 }
 
-export async function fetchActorMovies(movieId:number): Promise<movie[]>{
+export async function fetchActorMovies(movieId: number): Promise<movie[]> {
 	try {
-		const response = await fetch(`${BASE_URL}/person/${movieId}/movie_credits?language=pl-PL`, { headers: HEADERS });
-		const data = await response.json();
-		return data.cast.slice(0,10).map((movieData: any) => ({
+		const response = await fetch(`${BASE_URL}/person/${movieId}/movie_credits?language=en-US`, { headers: HEADERS })
+		const data = await response.json()
+		return data.cast.slice(0, 10).map((movieData: any) => ({
 			id: movieData.id,
 			title: movieData.title || movieData.name || 'No Title', // Use title or name if available
 			img: `https://image.tmdb.org/t/p/w500${movieData.poster_path}`,
 			overview: movieData.overview || 'Brak opisu',
 			stars: movieData.vote_average || 0,
 			type: movieData.genre_ids.length > 0 ? movieData.genre_ids[0].toString() : 'Nieznany',
-		  }));
+		}))
+	} catch (error) {
+		console.error('Błąd pobierania filmów aktora:', error)
+		return []
 	}
-		catch (error) {
-		  console.error('Błąd pobierania filmów aktora:', error)
-		  return []
-	  }
 }

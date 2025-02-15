@@ -1,15 +1,16 @@
-import './App.css'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import MainPage from './pages/MainPage'
 import MoviePage from './pages/MoviePage'
 import MovieInfoPage from './pages/MovieInfoPage'
 import TvShowPage from './pages/TvShowPage'
 import TvShowInfoPage from './pages/TvShowInfoPage'
-import ActorPage from './pages/ActorPage' // Upewnij się, że importujesz ActorPage
 import Navbar from './components/Navbar'
 import { NavbarProvider } from './contexts/NavbarProvider'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Footer from './components/Footer'
+import ActorPage from './pages/ActorPage'
 
 function App() {
 	return (
@@ -18,14 +19,12 @@ function App() {
 				<NavbarProvider>
 					<Navbar />
 					<Routes>
-						{/* Strony główne */}
+						<Route path="/" element={<MainPage />} />
 						<Route path="/movie" element={<MoviePage />} />
-						<Route path="/tv" element={<TvShowPage />} />
-						{/* Strony szczegółowe */}
 						<Route path="/movie/:id" element={<MovieInfoPage movieB={true} />} />
+						<Route path="/tv" element={<TvShowPage />} />
 						<Route path="/tv/:id" element={<TvShowInfoPage />} />
-						{/* Strona aktora */}
-						<Route path="/actor/:id" element={<ActorPage />} /> {/* Dodaj tę linię */}
+						<Route path="/actor/:id" element={<ActorPage />} />
 					</Routes>
 					<Footer />
 				</NavbarProvider>

@@ -22,7 +22,7 @@ interface MovieSliderProps {
 export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
 	const sliderRef = useRef<Slider | null>(null)
 	const navigate = useNavigate()
-	console.log(movieB)
+
 	const settings = {
 		dots: false,
 		infinite: true,

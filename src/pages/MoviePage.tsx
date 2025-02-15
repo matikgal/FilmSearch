@@ -14,12 +14,10 @@ interface Movie {
 export default function MoviePage() {
 	const [movies, setMovies] = useState<Movie[]>([])
 
-	// Ustawiamy tytuł strony
 	useEffect(() => {
 		document.title = 'CineSnap - Movies'
 	}, [])
 
-	// Pobieramy filmy (dla 'movie')
 	useEffect(() => {
 		async function fetchMovies() {
 			try {
@@ -32,7 +30,6 @@ export default function MoviePage() {
 		fetchMovies()
 	}, [])
 
-	// Kategorie filmów – każda kategoria ma flagę movie ustawioną na true
 	const movieType = [
 		{ type: 'popular', title: 'Popular Movies', movie: true },
 		{ type: 'now_playing', title: 'Now Playing', movie: true },

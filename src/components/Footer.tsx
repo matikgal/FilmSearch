@@ -10,36 +10,36 @@ export default function Footer() {
 						className="text-3xl lg:text-2xl text-white cursor-pointer hover:text-[var(--color-secondary)] duration-300">
 						FilmSearch
 					</Link>
-					<p className="text-sm mt-1">Dane o filmach pochodzą z API TMDB.</p>
+					<p className="text-sm mt-1">The video data comes from the TMDB API.</p>
 				</div>
 
 				<div className="mt-4 md:mt-0">
 					<ul className="flex gap-4 text-sm">
 						<li>
 							<a href="/" className="hover:text-white">
-								Strona główna
+								Homepage
+							</a>
+						</li>
+						<li>
+							<a href="/movie" className="hover:text-white">
+								Movie
+							</a>
+						</li>
+						<li>
+							<a href="/tv" className="hover:text-white">
+								TV Series
 							</a>
 						</li>
 						<li>
 							<a href="/" className="hover:text-white">
-								Filmy
-							</a>
-						</li>
-						<li>
-							<a href="/" className="hover:text-white">
-								Seriale
-							</a>
-						</li>
-						<li>
-							<a href="/" className="hover:text-white">
-								Kontakt
+								Contact
 							</a>
 						</li>
 					</ul>
 				</div>
 
 				<div className="mt-4 md:mt-0">
-					<p className="text-sm">&copy; {new Date().getFullYear()} FilmSearch</p>
+					<p className="text-sm">&copy; {new Date().getFullYear()} CineSnap</p>
 				</div>
 			</div>
 		</footer>
