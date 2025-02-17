@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import MoviePage from './pages/MoviePage'
@@ -11,6 +10,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Footer from './components/Footer'
 import ActorPage from './pages/ActorPage'
+import './index.css'
 
 function App() {
 	return (

@@ -1,50 +1,65 @@
-# React + TypeScript + Vite
+# CineSnap
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CineSnap to aplikacja webowa do wyszukiwania i przeglądania filmów oraz seriali. Aplikacja pobiera dane z API i umożliwia ich przeglądanie za pomocą responsywnego interfejsu użytkownika.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologie
 
-## Expanding the ESLint configuration
+- **React** – biblioteka do budowania interfejsów użytkownika
+- **TypeScript** – statycznie typowany JavaScript
+- **Vite** – szybkie środowisko deweloperskie
+- **Tailwind CSS** – narzędzie do szybkiego stylowania
+- **React Router DOM** – routing w aplikacjach React
+- **React Slick** – slider do wyświetlania treści
+- **React Icons** – ikony w aplikacji
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Funkcje
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Responsywny Navbar** – wyszukiwarka, menu oraz autoryzacja (Sign Up / Log In)
+- **Przeglądanie filmów i seriali** – oddzielne podstrony dla filmów (/movie) oraz seriali (/tv)
+- **Slidery** – prezentacja najnowszych filmów i seriali oraz przegląd kategorii
+- **Scroll to Top** – automatyczne przewijanie do góry przy zmianie ścieżki
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Instalacja
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Sklonuj repozytorium:**
+
+   ```bash
+   git clone <adres_repozytorium>
+   cd FilmSearch
+   Zainstaluj zależności:
+   ```
+
+bash
+Kopiuj
+Edytuj
+npm install
+Uruchom aplikację w trybie deweloperskim:
+
+bash
+Kopiuj
+Edytuj
+npm run dev
+Konfiguracja API
+Aby aplikacja mogła pobierać dane, skonfiguruj plik ApiService (w folderze src/Services) i ustaw swój klucz API (np. z TMDB).
+
+Struktura projektu
+src/components – komponenty interfejsu (Navbar, MovieSlider, LatestSlider itp.)
+src/pages – podstrony (MoviePage, TvShowPage itp.)
+src/hooks – niestandardowe hooki (useNavbar, ScrollToTop)
+src/contexts – konteksty globalne (NavbarContext)
+src/Services – usługi, np. ApiService
+Budowanie projektu
+Aby zbudować aplikację do produkcji, uruchom:
+
+bash
+Kopiuj
+Edytuj
+npm run build
+Licencja
+Projekt jest dostępny na licencji MIT (lub inna licencja, jeśli dotyczy).

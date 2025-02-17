@@ -9,6 +9,9 @@ export default {
 				background: '#210b4b', // Ciemne tło
 				accent: '#3f1c6d', // Ciemniejszy fiolet
 			},
+			fontFamily: {
+				delicious: ['"Delicious Handrawn"', 'cursive'],
+			},
 		},
 	},
 	plugins: [],

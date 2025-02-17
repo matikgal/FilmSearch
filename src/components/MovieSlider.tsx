@@ -1,9 +1,13 @@
+// MovieSlider - slider do wyświetlania filmów/seriali.
+// Kliknięcie elementu przenosi do szczegółów (movie/tv).
+
 import { useRef } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { FaStar } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
 import Slider from 'react-slick'
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6'
+
 interface Movie {
 	id: number
 	title: string
@@ -20,9 +24,11 @@ interface MovieSliderProps {
 }
 
 export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
+	// Ref do slidera i nawigacja
 	const sliderRef = useRef<Slider | null>(null)
 	const navigate = useNavigate()
 
+	// Ustawienia slidera
 	const settings = {
 		dots: false,
 		infinite: true,
@@ -58,11 +64,13 @@ export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
 
 	return (
 		<div>
-			<div className="flex justify-between items-center w-full  px-2">
+			{/* Nagłówek slidera z tytułem */}
+			<div className="flex justify-between items-center w-full px-2">
 				<div className="flex gap-x-2 text-xl font-semibold text-white">
 					<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
 					<h1 className="xl:text-2xl">{typ}</h1>
 				</div>
+				{/* Przyciski do przewijania slidera */}
 				<div className="gap-5 flex">
 					<button
 						onClick={() => sliderRef.current?.slickPrev()}
@@ -76,13 +84,15 @@ export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
 					</button>
 				</div>
 			</div>
+			{/* Slider z filmami/serialami */}
 			<Slider {...settings} ref={sliderRef} className="mt-5">
 				{movies.map(movie => (
 					<div
 						key={movie.id}
 						className="p-2"
 						onClick={() => {
-							if (movieB == true) {
+							// Przekierowanie do szczegółów
+							if (movieB === true) {
 								navigate(`/movie/${movie.id}`)
 							} else {
 								navigate(`/tv/${movie.id}`)
@@ -99,6 +109,7 @@ export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
 								<FaPlay className="cursor-pointer" />
 							</div>
 						</div>
+						{/* Ocena i tytuł filmu */}
 						<p className="flex items-center font-light text-sm mt-2 text-white gap-x-1 px-2">
 							<FaStar className="text-[var(--color-secondary)]" />
 							{movie.stars.toFixed(1)}

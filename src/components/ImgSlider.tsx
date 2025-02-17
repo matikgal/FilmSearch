@@ -1,7 +1,9 @@
+/* Komponent ImgSlider - slider zdjęć z przyciskami nawigacyjnymi */
 import { useRef } from 'react'
 import Slider from 'react-slick'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 
+// Ustawienia slidera dla zdjęć
 const imageSliderSettings = {
 	dots: false,
 	infinite: true,
@@ -42,20 +44,20 @@ export default function ImgSlider({ images, header }: ImgSliderProps) {
 
 	return (
 		<div>
-			<div className="flex justify-between w-full gap-5  px-2 mt-8">
-				<div className="flex gap-x-2 text-xl font-semibold text-white ">
+			{/* Nagłówek slidera i przyciski nawigacji */}
+			<div className="flex justify-between w-full gap-5 px-2 mt-8">
+				<div className="flex gap-x-2 text-xl font-semibold text-white">
 					<div className="w-[3px] bg-[var(--color-secondary)] rounded-full"></div>
 					<h1 className="xl:text-2xl">{header}</h1>
 				</div>
 				<div className="gap-x-5 flex flex-row">
-					{/* Przycisk do przesuwania w lewo */}
+					{/* Przycisk przesuwania w lewo */}
 					<button
 						onClick={() => sliderRef.current?.slickPrev()}
 						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
 						<FaAngleLeft />
 					</button>
-
-					{/* Przycisk do przesuwania w prawo */}
+					{/* Przycisk przesuwania w prawo */}
 					<button
 						onClick={() => sliderRef.current?.slickNext()}
 						className="text-white bg-[var(--color-primary)] p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-black transition">
@@ -63,10 +65,11 @@ export default function ImgSlider({ images, header }: ImgSliderProps) {
 					</button>
 				</div>
 			</div>
+			{/* Slider z obrazkami */}
 			<Slider {...imageSliderSettings} ref={sliderRef} className="mt-5 flex justify-center space-x-4">
 				{images.map((img, index) => (
-					<div key={index} className="p-2 outline-none  focus:outline-none  ">
-						<img src={img.link} alt={img.alt} className="w-full rounded-lg " />
+					<div key={index} className="p-2 outline-none focus:outline-none">
+						<img src={img.link} alt={img.alt} className="w-full rounded-lg" />
 					</div>
 				))}
 			</Slider>
