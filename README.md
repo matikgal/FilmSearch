@@ -35,15 +35,9 @@ CineSnap to aplikacja webowa do wyszukiwania i przeglądania filmów oraz serial
    Zainstaluj zależności:
    ```
 
-bash
-Kopiuj
-Edytuj
 npm install
 Uruchom aplikację w trybie deweloperskim:
 
-bash
-Kopiuj
-Edytuj
 npm run dev
 Konfiguracja API
 Aby aplikacja mogła pobierać dane, skonfiguruj plik ApiService (w folderze src/Services) i ustaw swój klucz API (np. z TMDB).
@@ -57,9 +51,6 @@ src/Services – usługi, np. ApiService
 Budowanie projektu
 Aby zbudować aplikację do produkcji, uruchom:
 
-bash
-Kopiuj
-Edytuj
 npm run build
 Licencja
 Projekt jest dostępny na licencji MIT (lub inna licencja, jeśli dotyczy).
