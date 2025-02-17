@@ -43,8 +43,7 @@ interface Item {
 const BASE_URL = 'https://api.themoviedb.org/3'
 const HEADERS = {
 	accept: 'application/json',
-	Authorization:
-		'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZmU1ZWIxYzViMzUxYzY3YTgyYzAxNzkxY2I5ZjhhMSIsIm5iZiI6MTcwOTM5NTY0OC41ODksInN1YiI6IjY1ZTM0ZWMwOTk3OWQyMDE3Y2IwNmI5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.F5mm5q_Bv0I3mWtj2S4Kd23iFHcXeEugmVbSxzCIRi4',
+	Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
 }
 
 export async function movieList(page = 1, movieOrTv = 'movie'): Promise<movie[]> {

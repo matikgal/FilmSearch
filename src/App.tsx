@@ -15,7 +15,7 @@ import ActorPage from './pages/ActorPage'
 function App() {
 	return (
 		<Router>
-			<div className="bg-[var(--color-accent)]">
+			<div className="bg-[var(--color-accent)] ">
 				<NavbarProvider>
 					<Navbar />
 					<Routes>

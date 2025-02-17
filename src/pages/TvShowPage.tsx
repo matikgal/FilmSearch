@@ -38,7 +38,7 @@ export default function TvShowPage() {
 	]
 
 	return (
-		<div className="container p-5 mx-auto md:w-4/5 2xl:w-3/5">
+		<div className="container p-5 mx-auto md:w-4/5 2xl:w-3/5 ">
 			{tvType.map(({ type, title, movie }) => (
 				<div key={type} className="mt-10">
 					<MovieSlider movies={shows.filter(s => s.type === type)} typ={title} movieB={movie} />

@@ -50,7 +50,7 @@ export default function TvShowInfoPage() {
 				</div>
 			) : null}
 
-			<div className="p-5 text-white container mx-auto max-w-6xl">
+			<div className="p-5 text-white container mx-auto max-w-6xl ">
 				<div className="grid grid-cols-3 gap-5 items-stretch">
 					<div
 						className="hidden md:block h-full min-h-[400px] bg-center bg-contain bg-no-repeat"
