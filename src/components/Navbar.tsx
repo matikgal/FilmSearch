@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
 		<div className="relative w-full bg-[var(--color-background)] px-5 lg:px-10">
 			<div className="flex items-center justify-between h-[64px] container mx-auto">
 				<Link
-					to="/"
+					to="/FilmSearch"
 					className="text-3xl lg:text-5xl text-white cursor-pointer hover:text-[var(--color-secondary)] duration-300 font-serif">
 					CineSnap
 				</Link>

@@ -19,7 +19,7 @@ export default function Footer() {
 				<div className="mt-4 md:mt-0">
 					<ul className="flex gap-4 text-sm">
 						<li>
-							<a href="/" className="hover:text-white">
+							<a href="/FilmSearch" className="hover:text-white">
 								Strona główna
 							</a>
 						</li>
@@ -34,7 +34,7 @@ export default function Footer() {
 							</a>
 						</li>
 						<li>
-							<a href="/" className="hover:text-white">
+							<a href="/FilmSearch" className="hover:text-white">
 								Kontakt
 							</a>
 						</li>
