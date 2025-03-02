@@ -49,24 +49,19 @@ const HEADERS = {
 export async function movieList(page = 1, movieOrTv = 'movie'): Promise<movie[]> {
 	let types: string[]
 
-	if (movieOrTv == 'tv') {
+	if (movieOrTv === 'tv') {
 		types = ['airing_today', 'on_the_air', 'top_rated', 'popular']
 	} else {
 		types = ['now_playing', 'popular', 'top_rated', 'upcoming']
 	}
 	const promises = types.map(async type => {
 		try {
-			const url = `https://api.themoviedb.org/3/${movieOrTv}/${type}?language=en-US&page=${page}`
+			const url = `${BASE_URL}/${movieOrTv}/${type}?language=en-US&page=${page}`
 			console.log(url)
 			const response = await fetch(url, {
 				method: 'GET',
-				headers: {
-					accept: 'application/json',
-					Authorization:
-						'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZmU1ZWIxYzViMzUxYzY3YTgyYzAxNzkxY2I5ZjhhMSIsIm5iZiI6MTcwOTM5NTY0OC41ODksInN1YiI6IjY1ZTM0ZWMwOTk3OWQyMDE3Y2IwNmI5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.F5mm5q_Bv0I3mWtj2S4Kd23iFHcXeEugmVbSxzCIRi4',
-				},
+				headers: HEADERS,
 			})
-
 			const data = await response.json()
 
 			return data.results.map((movie: any) => ({
@@ -109,6 +104,7 @@ export async function fetchMovieDetails(movieId: number): Promise<MovieDetails |
 		return null
 	}
 }
+
 export async function fetchTvDetails(movieId: number): Promise<MovieDetails | null> {
 	try {
 		const response = await fetch(`${BASE_URL}/tv/${movieId}?language=en-US`, { headers: HEADERS })
@@ -171,6 +167,7 @@ export async function fetchTvCredits(movieId: number) {
 		return null
 	}
 }
+
 /**
  * Pobiera zdjęcia z filmu
  */
@@ -188,6 +185,7 @@ export async function fetchMovieImages(movieId: number): Promise<{ id: string; p
 		return []
 	}
 }
+
 export async function fetchTvImages(movieId: number): Promise<{ id: string; path: string }[]> {
 	try {
 		const response = await fetch(`${BASE_URL}/tv/${movieId}/images`, { headers: HEADERS })
@@ -215,6 +213,7 @@ export async function fetchMovieVideos(movieId: number) {
 		return null
 	}
 }
+
 export async function fetchTvVideos(movieId: number) {
 	try {
 		const response = await fetch(`${BASE_URL}/tv/${movieId}/videos?language=en-US`, { headers: HEADERS })
@@ -250,6 +249,7 @@ export async function fetchSimilarMovies(movieId: number): Promise<movie[]> {
 		return []
 	}
 }
+
 export async function fetchRecommendedTv(movieId: number): Promise<movie[]> {
 	try {
 		const response = await fetch(`${BASE_URL}/tv/${movieId}/similar?language=en-US&page=1`, { headers: HEADERS })
@@ -323,7 +323,7 @@ export async function fetchActorMovies(movieId: number): Promise<movie[]> {
 		const data = await response.json()
 		return data.cast.slice(0, 10).map((movieData: any) => ({
 			id: movieData.id,
-			title: movieData.title || movieData.name || 'No Title', // Use title or name if available
+			title: movieData.title || movieData.name || 'No Title',
 			img: `https://image.tmdb.org/t/p/w500${movieData.poster_path}`,
 			overview: movieData.overview || 'Brak opisu',
 			stars: movieData.vote_average || 0,

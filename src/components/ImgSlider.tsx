@@ -40,7 +40,7 @@ interface ImgSliderProps {
 }
 
 export default function ImgSlider({ images, header }: ImgSliderProps) {
-	const sliderRef = useRef<Slider>(null)
+	const sliderRef = useRef<InstanceType<typeof Slider> | null>(null)
 
 	return (
 		<div>

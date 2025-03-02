@@ -26,7 +26,8 @@ const LatestSlider: React.FC<LatestSliderProps> = ({ media, sliderTitle }) => {
 	// Stan przechowujący pobrane elementy
 	const [items, setItems] = useState<Movie[]>([])
 	// Ref do slidera dla nawigacji
-	const sliderRef = useRef<Slider | null>(null)
+	const sliderRef = useRef<InstanceType<typeof Slider> | null>(null)
+
 	const navigate = useNavigate()
 
 	// Pobiera dane i filtruje je w zależności od typu media

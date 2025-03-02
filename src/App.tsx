@@ -19,7 +19,7 @@ function App() {
 				<NavbarProvider>
 					<Navbar />
 					<Routes>
-						<Route path="/" element={<MainPage />} />
+						<Route path="/FilmSearch" element={<MainPage />} />
 						<Route path="/movie" element={<MoviePage />} />
 						<Route path="/movie/:id" element={<MovieInfoPage movieB={true} />} />
 						<Route path="/tv" element={<TvShowPage />} />

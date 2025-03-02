@@ -25,7 +25,8 @@ interface MovieSliderProps {
 
 export function MovieSlider({ movies, typ, movieB }: MovieSliderProps) {
 	// Ref do slidera i nawigacja
-	const sliderRef = useRef<Slider | null>(null)
+	const sliderRef = useRef<InstanceType<typeof Slider> | null>(null)
+
 	const navigate = useNavigate()
 
 	// Ustawienia slidera
